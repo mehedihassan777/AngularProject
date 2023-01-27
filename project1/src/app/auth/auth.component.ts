@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { AuthResponseData, AuthService } from './auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
+  subscription: Subscription;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -37,9 +38,8 @@ export class AuthComponent {
       authObs = this.authService.signUp(email, password);
     }
 
-    authObs.subscribe(
+    this.subscription = authObs.subscribe(
       resData => {
-        console.log(resData);
         this.isLoading = false;
         this.router.navigate(['/recipes']);
       },
@@ -51,5 +51,9 @@ export class AuthComponent {
     );
 
     form.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
