@@ -53,6 +53,10 @@ export class AuthComponent implements OnDestroy {
     form.reset();
   }
 
+  onErrorShowed() {
+    this.error = null;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
