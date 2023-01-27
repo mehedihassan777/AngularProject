@@ -12,6 +12,7 @@ import { DataStorageService } from "../shared/data-storage.service";
 export class HeaderComponent implements OnInit, OnDestroy {
 
     isAuthenticated = false;
+    isFetched = false;
     userSub: Subscription;
 
     constructor(private dataStoreService: DataStorageService, private authSer: AuthService) { }
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onFetchData() {
         this.dataStoreService.fetchRecipes().subscribe();
+        this.isFetched = true;
     }
 
     onLogout() {
