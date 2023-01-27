@@ -124,10 +124,10 @@ export class AuthService {
 
     logout() {
         this.user.next(null);
-        this.router.navigate(['/auth']);
         localStorage.removeItem('userData');
         if (this.tokenExp)
             clearTimeout(this.tokenExp);
+        this.router.navigate(['/auth']);
     }
 
     autoLogout(expire: number) {
