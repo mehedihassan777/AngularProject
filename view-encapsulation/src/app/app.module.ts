@@ -12,6 +12,7 @@ import { QparamsComponent } from './qparams/qparams.component';
 import { QparamsuserComponent } from './qparamsuser/qparamsuser.component';
 import { FormsModule } from '@angular/forms';
 import { ShortenPipe } from './shorten.pipe';
+import { LifeCycleComponent } from './life-cycle/life-cycle.component';
 
 
 
@@ -21,8 +22,9 @@ const appRoutes: Routes = [
   { path: 'parent', component: ParentComponent },
   { path: 'tdform', component: TdFormComponent },
   { path: 'rform', component: ReactiveFormComponent },
-  { path: 'qprams/:id', component: QparamsComponent },
-  { path: 'qpramsuser/:id/:name', component: QparamsuserComponent }
+  { path: 'qprams', component: QparamsComponent },
+  { path: 'qpramsuser', component: QparamsuserComponent },
+  { path: 'lifecycle', component: LifeCycleComponent }
 ]
 
 @NgModule({
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     ReactiveFormComponent,
     QparamsComponent,
     QparamsuserComponent,
-    ShortenPipe
+    ShortenPipe,
+    LifeCycleComponent
   ],
   imports: [
     BrowserModule,
