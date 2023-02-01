@@ -10,7 +10,7 @@ import { TdFormComponent } from './td-form/td-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { QparamsComponent } from './qparams/qparams.component';
 import { QparamsuserComponent } from './qparamsuser/qparamsuser.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortenPipe } from './shorten.pipe';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
 
@@ -43,6 +43,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     [RouterModule.forRoot(appRoutes)]
   ],

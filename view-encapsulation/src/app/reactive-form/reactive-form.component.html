@@ -6,6 +6,113 @@
     <br>
     <hr>
     <div class="row">
-
+        <form [formGroup]="practiceForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" formControlName="username" class="form-control">
+                <span *ngIf="!practiceForm.get('username').valid && practiceForm.get('username').touched"
+                    class="help-block">
+                    <span *ngIf="practiceForm.get('username').errors['required']" class="help-block">Please
+                        Enter
+                        a valid username</span>
+                </span>
+            </div>
+            <div *ngIf="showEmail" class="form-group">
+                <label for="email">email</label>
+                <input type="text" formControlName="email" class="form-control">
+                <span *ngIf="!practiceForm.get('email').valid && practiceForm.get('email').touched"
+                    class="help-block">Please
+                    Enter a
+                    valid email</span>
+            </div>
+            <div *ngIf="or" class="text-center"><br>Or</div>
+            <div *ngIf="showPhone" class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" formControlName="phone" class="form-control">
+                <span *ngIf="!practiceForm.get('phone').valid && practiceForm.get('phone').touched"
+                    class="help-block">Please
+                    Enter a
+                    valid phone number</span>
+            </div>
+            <br>
+            Gender
+            <div class="radio" *ngFor="let gender of genders">
+                <label>
+                    <input type="radio" formControlName="gender" [value]="gender">{{ gender }}
+                </label>
+            </div>
+            <br>
+            <div formArrayName="sports">
+                <h4>Add Your Favorite Sports</h4>
+                <button class="btn btn-info" type="button" (click)="onAddSport()">Add Sport</button>
+                <div class="form-group" *ngFor="let hobbyControl of controls; let i = index">
+                    <div class="row mt-3">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" [formControlName]="i">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger" (click)="onDeleteSport(i)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <span *ngIf="!practiceForm.valid && practiceForm.touched" class="help-block">Please Enter
+                valid Data</span>
+            <div class="text-center">
+                <button class="btn btn-primary" [disabled]="!practiceForm.valid" type="submit">Submit</button>
+            </div>
+        </form>
     </div>
+    <div *ngIf="submitted">
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <h3>Username:</h3>
+            </div>
+            <div class="col-md-4">
+                <h6>{{username}}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex" *ngIf="loadEmail">
+                <div class="col-md-2">
+                    <h3>Email:</h3>
+                </div>
+                <div class="col-md-8">
+                    <h6>{{loadEmail}}</h6>
+                </div>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="d-flex" *ngIf="loadPhone">
+                <div class="col-md-2">
+                    <h3>Phone:</h3>
+                </div>
+                <div class="col-md-8">
+                    <h6>{{loadPhone}}</h6>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <h3>Gender:</h3>
+            </div>
+            <div class="col-md-4">
+                <h6>{{gender}}</h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <h3>Sports:</h3>
+            </div>
+            <div class="col-md-4">
+                <h6><span *ngFor="let sport of sports; let i= index">{{sport}}<span *ngIf="i<sports.length-1">,</span></span></h6>
+            </div>
+        </div>
+    </div>
+
 </div>
