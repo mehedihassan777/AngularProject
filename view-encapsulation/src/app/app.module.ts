@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'parent', component: ParentComponent },
   { path: 'tdform', component: TdFormComponent },
   { path: 'rform', component: ReactiveFormComponent },
+  { path: 'rform/:id', component: ReactiveFormComponent },
   { path: 'qprams', component: QparamsComponent },
   { path: 'qpramsuser', component: QparamsuserComponent },
   { path: 'lifecycle', component: LifeCycleComponent }

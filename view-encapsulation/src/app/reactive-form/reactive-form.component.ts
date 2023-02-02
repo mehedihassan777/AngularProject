@@ -1,94 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Sport } from '../sports.model';
+import { User } from '../user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
   styleUrls: ['./reactive-form.component.css']
 })
-export class ReactiveFormComponent implements OnInit {
+export class ReactiveFormComponent implements OnInit, DoCheck {
   practiceForm: FormGroup;
-  genders = ['male', 'female'];
-  username: string = '';
-  loadEmail: string = '';
-  loadPhone: string = '';
-  gender: string = '';
-  sports: Array<string> = [];
-  submitted = false;
-  showEmail = true;
-  showPhone = true;
-  or = true;
+  id: number;
+  user = new User('', '', null, '', []);
+
+  constructor(private router: Router, private route: ActivatedRoute, private userSer: UsersService) { }
 
   ngOnInit() {
+    this.id = +this.route.snapshot.params['id'] + 1;
+    if (this.id > this.userSer.users.length)
+      this.id = undefined;
+    console.log(this.id);
+    if (this.id) {
+      this.user = this.userSer.getUser(this.id - 1);
+    }
+    this.loadForm();
+  }
+
+  loadForm() {
+    let sports = new FormArray([]);
+    if (this.user.sports) {
+      for (let sport of this.user.sports) {
+        sports.push(
+          new FormGroup({
+            name: new FormControl(sport.name, Validators.required),
+            pYear: new FormControl(sport.pYear)
+          })
+        );
+      }
+    }
+
     this.practiceForm = new FormGroup({
-      'username': new FormControl(null, [Validators.required]),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'phone': new FormControl(null),
-      'gender': new FormControl('male'),
-      'sports': new FormArray([])
+      name: new FormControl(this.user.name, [Validators.required]),
+      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
+      phone: new FormControl(this.user.phone, [Validators.required]),
+      gender: new FormControl(this.user.gender ? this.user.gender : 'Male'),
+      sports: sports
     });
-    this.practiceForm.controls['phone'].setValidators([Validators.required, Validators.minLength(10)]);
-    // this.practiceForm.controls['phone'].statusChanges.subscribe(status => {
-    //   //console.log(status);
-    //   if (status == 'VALID') {
-    //     this.showEmail = false;
-    //     this.or = false;
-    //     this.practiceForm.controls['email'].clearValidators();
-    //     this.practiceForm.controls['email'].updateValueAndValidity();
-    //   }
-    // });
-
-    this.practiceForm.controls['email'].statusChanges.subscribe(status => {
-      console.log('email' + status);
-      if (status == 'VALID' && this.showEmail) {
-        this.showPhone = false;
-        this.or = false;
-        this.practiceForm.controls['phone'].clearValidators();
-        this.practiceForm.controls['phone'].updateValueAndValidity();
-      }
-      else {
-        if (this.showEmail && this.showPhone)
-          this.or = true;
-        this.showPhone = true;
-        this.practiceForm.controls['phone'].setValidators([Validators.required, Validators.minLength(10)]);
-      }
-    });
-
-    this.practiceForm.controls['phone'].statusChanges.subscribe(status => {
-      console.log('phone' + status);
-      if (status == 'VALID' && this.showPhone) {
-        this.showEmail = false;
-        this.or = false;
-        this.practiceForm.controls['email'].clearValidators();
-        this.practiceForm.controls['email'].updateValueAndValidity();
-
-      }
-      else {
-        if (this.showEmail && this.showPhone)
-          this.or = true;
-        this.showEmail = true;
-        this.practiceForm.controls['email'].setValidators([Validators.required, Validators.email]);
-      }
-    });
-
-
   }
 
   onAddSport() {
     const control = new FormControl(null, Validators.required);
-    (<FormArray>this.practiceForm.get('sports')).push(control);
+    (<FormArray>this.practiceForm.get('sports')).push(new FormGroup({
+      name: new FormControl(null, Validators.required),
+      pYear: new FormControl(null)
+    }));
   }
 
   onSubmit() {
-    this.username = this.practiceForm.get('username').value;
-    this.loadEmail = this.practiceForm.get('email').value;
-    this.loadPhone = this.practiceForm.get('phone').value;
-    this.gender = this.practiceForm.get('gender').value;
-    this.sports = this.practiceForm.get('sports').value;
-    this.submitted = true;
-    this.practiceForm.reset();
-    console.log(this.loadEmail);
+    if (this.practiceForm.valid) {
+      if (this.id) {
+        this.userSer.updateUser(this.id-1, this.practiceForm.value);
+      }
+      else
+        this.userSer.addUser(this.practiceForm.value);
+
+      console.log(this.practiceForm.valid);
+      this.router.navigate(['/qpramsuser']);
+    }
   }
 
   onDeleteSport(i) {
@@ -97,5 +77,30 @@ export class ReactiveFormComponent implements OnInit {
 
   get controls() {
     return (this.practiceForm.get('sports') as FormArray).controls;
+  }
+
+  ngDoCheck(): void {
+    if (this.practiceForm.value.phone) {
+      this.practiceForm.controls['email'].clearValidators();
+      this.practiceForm.controls['email'].updateValueAndValidity();
+    }
+    else if (this.practiceForm.value.email) {
+      this.practiceForm.controls['phone'].clearValidators();
+      this.practiceForm.controls['phone'].updateValueAndValidity();
+    }
+    else if (!this.practiceForm.value.phone && !this.practiceForm.value.email) {
+      this.practiceForm.controls['phone'].setValidators([Validators.required]);
+      this.practiceForm.controls['email'].setValidators([Validators.required, Validators.email]);
+      this.practiceForm.controls['phone'].updateValueAndValidity();
+      this.practiceForm.controls['email'].updateValueAndValidity();
+    }
+    else if (!this.practiceForm.value.phone) {
+      this.practiceForm.controls['email'].setValidators([Validators.required, Validators.email]);
+      this.practiceForm.controls['email'].updateValueAndValidity();
+    }
+    else if (!this.practiceForm.value.email) {
+      this.practiceForm.controls['phone'].setValidators([Validators.required]);
+      this.practiceForm.controls['phone'].updateValueAndValidity();
+    }
   }
 }

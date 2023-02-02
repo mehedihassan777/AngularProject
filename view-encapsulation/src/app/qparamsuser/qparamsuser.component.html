@@ -6,9 +6,41 @@
     <br>
     <hr>
     <div class="row">
-        <h4>Name : {{ username }}</h4>
-        <h4>Id : {{ loadUser.id }}</h4>
-        <h4>Role : {{ loadUser.role }}</h4>
-        <h4>Status : {{ loadUser.status }}</h4>
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Sports
+                    <tr>
+                        <td>Name</td>
+                        <td style="padding-left:150px;">Year</td>
+                    </tr>
+                </th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.gender}}</td>
+                    <td>
+                        <tr>
+                            <td>
+                                <p><span *ngFor="let sport of user.sports; let i= index">{{sport.name}}<span
+                                            *ngIf="i<user.sports.length-1">,</span></span></p>
+                            </td>
+                            <td style="padding-left:100px;">
+                                <p><span *ngFor="let sport of user.sports; let i= index">{{sport.pYear}}<span
+                                            *ngIf="i<user.sports.length-1">,</span></span></p>
+                            </td>
+                        </tr>
+                    </td>
+                    <td><button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

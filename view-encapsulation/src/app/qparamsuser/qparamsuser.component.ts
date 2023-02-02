@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Sport } from '../sports.model';
+import { User } from '../user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-qparamsuser',
@@ -7,34 +10,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./qparamsuser.component.css']
 })
 export class QparamsuserComponent {
-  users = [
-    {
-      role: 'admin',
-      status: 'active',
-      id: 1
-    },
-    {
-      role: 'moderator',
-      status: 'inactive',
-      id: 2
-    },
-    {
-      role: 'user',
-      status: 'active',
-      id: 3
-    }
-  ];
 
-  loadUser: { role: string, status: string, id: number };
-  userId: number;
-  username: string = '';
+  users: User[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private router: Router, private userSer: UsersService) { }
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.queryParams['id'];
-    //console.log(this.userId);
-    this.username = this.route.snapshot.queryParams['name'];
-    this.loadUser = this.users[this.userId - 1];
+    this.users = this.userSer.users;
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['rform', id]);
   }
 }
