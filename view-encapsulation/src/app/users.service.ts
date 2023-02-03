@@ -7,7 +7,7 @@ export class UsersService {
     users: User[] = [];
     userChanged = new Subject<string>();
 
-    getUser(id: number) {
+    getUser(id: string) {
         return this.users[id];
     }
 
@@ -16,7 +16,7 @@ export class UsersService {
         this.userChanged.next('User Added');
     }
 
-    updateUser(id: number, user: User) {
+    updateUser(id: string, user: User) {
         this.users[id] = user;
         this.userChanged.next('User Updated');
     }

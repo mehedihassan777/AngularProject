@@ -1,9 +1,9 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Sport } from '../sports.model';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
+import { UserFormType } from './formType';
 
 @Component({
   selector: 'app-reactive-form',
@@ -11,27 +11,29 @@ import { UsersService } from '../users.service';
   styleUrls: ['./reactive-form.component.css']
 })
 export class ReactiveFormComponent implements OnInit, DoCheck {
-  practiceForm: FormGroup;
-  id: number;
-  user = new User('', '', null, '', []);
+  practiceForm: FormGroup<UserFormType>;
+  //id: number;
+  //user = new User('', '', null, '', []);
 
   constructor(private router: Router, private route: ActivatedRoute, private userSer: UsersService) { }
 
   ngOnInit() {
-    this.id = +this.route.snapshot.params['id'] + 1;
-    if (this.id > this.userSer.users.length)
-      this.id = undefined;
-    console.log(this.id);
-    if (this.id) {
-      this.user = this.userSer.getUser(this.id - 1);
+    //console.log(this.userSer.users[this.route.snapshot.params['id']]);
+    if (this.userSer.users[this.route.snapshot.params['id']] === undefined) {
+      //let user: User = {name: '', email: '', phone: null, gender: '', sports: [{name:'', pYear: null}]};
+      this.loadForm({ name: '', email: '', phone: null, gender: '', sports: [{ name: '', pYear: null }] });
     }
-    this.loadForm();
+    else {
+      this.loadForm(this.userSer.users[this.route.snapshot.params['id']]);
+    }
   }
 
-  loadForm() {
+  loadForm(user: User) {
     let sports = new FormArray([]);
-    if (this.user.sports) {
-      for (let sport of this.user.sports) {
+    let mode = false;
+    if (user.name) {
+      mode = true;
+      for (let sport of user.sports) {
         sports.push(
           new FormGroup({
             name: new FormControl(sport.name, Validators.required),
@@ -42,10 +44,11 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
     }
 
     this.practiceForm = new FormGroup({
-      name: new FormControl(this.user.name, [Validators.required]),
-      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
-      phone: new FormControl(this.user.phone, [Validators.required]),
-      gender: new FormControl(this.user.gender ? this.user.gender : 'Male'),
+      name: new FormControl(user.name, [Validators.required]),
+      email: new FormControl(user.email, [Validators.required, Validators.email]),
+      mode: new FormControl(mode),
+      phone: new FormControl(user.phone, [Validators.required]),
+      gender: new FormControl(user.gender ? user.gender : 'Male'),
       sports: sports
     });
   }
@@ -60,13 +63,12 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
 
   onSubmit() {
     if (this.practiceForm.valid) {
-      if (this.id) {
-        this.userSer.updateUser(this.id-1, this.practiceForm.value);
+      if (this.userSer.users[this.route.snapshot.params['id']]) {
+        this.userSer.updateUser(this.route.snapshot.params['id'], { name: this.practiceForm.value.name, email: this.practiceForm.value.email, phone: this.practiceForm.value.phone, gender: this.practiceForm.value.gender, sports: this.practiceForm.value.sports });
       }
       else
-        this.userSer.addUser(this.practiceForm.value);
+        this.userSer.addUser({ name: this.practiceForm.value.name, email: this.practiceForm.value.email, phone: this.practiceForm.value.phone, gender: this.practiceForm.value.gender, sports: this.practiceForm.value.sports });
 
-      console.log(this.practiceForm.valid);
       this.router.navigate(['/qpramsuser']);
     }
   }

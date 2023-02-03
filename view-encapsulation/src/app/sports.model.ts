@@ -1,5 +1,4 @@
-export class Sport {
-    constructor(public name: string, public pYear: number) {
-
-    }
+export interface Sport {
+    name: string;
+    pYear?: number
 }

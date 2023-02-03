@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
   title = 'view-encapsulation';
 
   setUsers: User[] = [
-    new User('Mehedi', 'mehadihassan170@gmail.com', null, 'Male', [new Sport('Cricket', 7), new Sport('Football', 5)]),
-    new User('Hassan', null, 1773696417, 'Male', [new Sport('Cricket', 7), new Sport('Football', 5)]),
-    new User('Lemon', 'mehadilemon160@gmail.com', 1773696417, 'Male', [new Sport('Cricket', 7), new Sport('Football', 5)])
+    { name: 'Mehedi', email: 'mehadihassan170@gmail.com', phone: null, gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
+    { name: 'Hassan', email: '', phone: 1773696417, gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
+    { name: 'Lemon', email: 'mehadilemon160@gmail.com', phone: 1773696417, gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] }
   ];
 
   constructor(private userSer: UsersService) { }

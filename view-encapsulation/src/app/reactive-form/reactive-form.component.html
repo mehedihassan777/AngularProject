@@ -10,8 +10,7 @@
             <div class="form-group">
                 <label for="username">Name</label>
                 <input type="text" formControlName="name" class="form-control">
-                <span *ngIf="!practiceForm.get('name').valid && practiceForm.get('name').touched"
-                    class="help-block">
+                <span *ngIf="!practiceForm.get('name').valid && practiceForm.get('name').touched" class="help-block">
                     <span *ngIf="practiceForm.get('name').errors['required']" class="help-block">Please
                         Enter
                         a valid username</span>
@@ -20,6 +19,7 @@
             <div class="form-group">
                 <label for="email">email</label>
                 <input type="text" formControlName="email" class="form-control">
+                <input type="text" hidden formControlName="mode" class="form-control">
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label>
@@ -62,8 +62,9 @@
             <span *ngIf="!practiceForm.valid && practiceForm.touched" class="help-block">Please Enter
                 valid Data</span>
             <div class="text-center">
-                <button class="btn btn-primary" [disabled]="!practiceForm.valid" type="submit">{{ id ? 'Update'
-                : 'Add New' }}</button>
+                <button class="btn btn-primary" [disabled]="!practiceForm.valid" type="submit">{{
+                    practiceForm.get('mode').value ? 'Update'
+                    : 'Add New' }}</button>
             </div>
         </form>
     </div>
