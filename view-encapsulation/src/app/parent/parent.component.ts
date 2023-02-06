@@ -4,8 +4,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ParentComponent {
-
-}
+export class ParentComponent {}
