@@ -1,47 +1,73 @@
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"><a routerLink="/home" class="btn btn-success">Home</a></div>
+  <div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <a routerLink="/home" class="btn btn-success">Home</a>
     </div>
-    <br>
-    <hr>
-    <div class="row">
-        <table class="table">
-            <thead>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Gender</th>
-                <th>Sports
-                    <tr>
-                        <td>Name</td>
-                        <td style="padding-left:150px;">Year</td>
-                    </tr>
-                </th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users; let i = index">
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone}}</td>
-                    <td>{{user.gender}}</td>
-                    <td>
-                        <tr>
-                            <td>
-                                <p><span *ngFor="let sport of user.sports; let i= index">{{sport.name}}<span
-                                            *ngIf="i<user.sports.length-1">,</span></span></p>
-                            </td>
-                            <td style="padding-left:100px;">
-                                <p><span *ngFor="let sport of user.sports; let i= index">{{sport.pYear}}<span
-                                            *ngIf="i<user.sports.length-1">,</span></span></p>
-                            </td>
-                        </tr>
-                    </td>
-                    <td><button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="onDelete(i)">X</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>
+          Sports
+          <tr>
+            <td>Name</td>
+            <td style="padding-left: 150px">Year</td>
+          </tr>
+        </th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.gender }}</td>
+          <td>
+            <tr>
+              <td>
+                <p>
+                  <span *ngFor="let sport of user.sports; let i = index"
+                    >{{ sport.name
+                    }}<span *ngIf="i < user.sports.length - 1">,</span></span
+                  >
+                </p>
+              </td>
+              <td style="padding-left: 100px">
+                <p>
+                  <span *ngFor="let sport of user.sports; let i = index"
+                    >{{ sport.pYear
+                    }}<span *ngIf="i < user.sports.length - 1">,</span></span
+                  >
+                </p>
+              </td>
+            </tr>
+          </td>
+          <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(i)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="onDelete(i)">
+              X
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<!-- 
+<data-table-search></data-table-search> //Will contain a search field on Fullname.
+<data-table-header></user-table-header> // First Name, Last name, Email, Phone, Gender
+<data-table-body></data-table-body> //Pass users data and show them in the table
+<data-table-paginator></data-table-paginator> //Will accept pageNo, No of Items and show data based on provided params
+ -->
