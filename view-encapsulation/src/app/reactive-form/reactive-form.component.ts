@@ -60,22 +60,11 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
 
   onSubmit() {
     if (this.practiceForm.valid) {
+      const formUser = (this.practiceForm as FormGroup | Partial<User>);
       if (this.userSer.users[this.route.snapshot.params['id']]) {
-        this.userSer.updateUser(this.route.snapshot.params['id'], {
-          name: this.practiceForm.value.name,
-          email: this.practiceForm.value.email,
-          phone: this.practiceForm.value.phone,
-          gender: this.practiceForm.value.gender,
-          sports: this.practiceForm.value.sports,
-        });
+        this.userSer.updateUser(this.route.snapshot.params['id'], (formUser as FormGroup).value);
       } else
-        this.userSer.addUser({
-          name: this.practiceForm.value.name,
-          email: this.practiceForm.value.email,
-          phone: this.practiceForm.value.phone,
-          gender: this.practiceForm.value.gender,
-          sports: this.practiceForm.value.sports,
-        });
+        this.userSer.addUser((formUser as FormGroup).value);
 
       this.router.navigate(['/qpramsuser']);
     }
