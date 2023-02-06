@@ -1,6 +1,6 @@
 import { Sport } from "./sports.model";
 
-export interface User extends Sport {
+export interface User{
     name: string;
     email?: string;
     phone?: number;
