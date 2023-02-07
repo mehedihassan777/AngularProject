@@ -20,10 +20,6 @@ export class QparamsuserComponent {
 
   ngOnInit(): void {
     this.users = this.userSer.users;
-    this.subUser = this.userSer.userChanged.subscribe(message => {
-      console.log(message);
-      this.users = this.userSer.users;
-    })
 
   }
 

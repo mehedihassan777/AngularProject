@@ -34,6 +34,10 @@ export class TbodyComponent implements OnChanges, OnInit {
       this.currentPage = value;
       this.paginate();
     });
+    this.userSer.userChanged.subscribe(message => {
+      console.log(message);
+      this.ngOnChanges();
+    })
   }
 
   ngOnChanges(): void {
@@ -112,7 +116,9 @@ export class TbodyComponent implements OnChanges, OnInit {
     this.router.navigate(['rform', id]);
   }
   private onDelete(id: number) {
+    console.log(id);
     this.userSer.deleteUser(id);
+    console.log(this.userSer.users);
   }
 
 }
