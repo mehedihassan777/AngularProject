@@ -1,108 +1,94 @@
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <a routerLink="/home" class="btn btn-success">Home</a>
+    <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a routerLink="/home" class="btn btn-success">Home</a>
+        </div>
     </div>
-  </div>
-  <br />
-  <hr />
-  <div class="row">
-    <form [formGroup]="practiceForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="username">Name</label>
-        <input type="text" formControlName="name" class="form-control" />
-        <span
-          *ngIf="
-            !practiceForm.get('name').valid && practiceForm.get('name').touched
-          "
-          class="help-block"
-        >
-          <span
-            *ngIf="practiceForm.get('name').errors['required']"
-            class="help-block"
-            >Please Enter a valid username</span
-          >
-        </span>
-      </div>
-      <div class="form-group">
-        <label for="email">email</label>
-        <input type="text" formControlName="email" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="number" formControlName="phone" class="form-control" />
-        <span
-          *ngIf="
+    <br />
+    <hr />
+    <div class="row">
+        <form [formGroup]="practiceForm" (ngSubmit)="onSubmit()">
+            <div class="row d-flex">
+                <div class="form-group col-md-6">
+                    <label for="username">First Name</label>
+                    <input type="text" formControlName="fname" class="form-control" />
+                    <span *ngIf="
+                        !practiceForm.get('fname').valid && practiceForm.get('fname').touched
+                      " class="help-block">
+                        <span *ngIf="practiceForm.get('fname').errors['required']" class="help-block">Please Enter a
+                            valid
+                            username</span>
+                    </span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="username">Last Name</label>
+                    <input type="text" formControlName="lname" class="form-control" />
+                    <span *ngIf="
+                        !practiceForm.get('lname').valid && practiceForm.get('lname').touched
+                      " class="help-block">
+                        <span *ngIf="practiceForm.get('lname').errors['required']" class="help-block">Please Enter a
+                            valid
+                            username</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">email</label>
+                <input type="text" formControlName="email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="number" formControlName="phone" class="form-control" />
+                <span *ngIf="
             !practiceForm.value.email &&
             !practiceForm.value.phone &&
             (practiceForm.get('phone').touched ||
               practiceForm.get('email').touched)
-          "
-          class="help-block"
-        >
-          Email Or Phone is Required
-        </span>
-      </div>
-      <br />
-      Gender
-      <div class="radio">
-        <label>
-          <input type="radio" formControlName="gender" value="Male" />Male
-        </label>
-        <label>
-          <input type="radio" formControlName="gender" value="Female" />Female
-        </label>
-      </div>
-      <br />
-      <div formArrayName="sports">
-        <h4>Add Your Favorite Sports</h4>
-        <button class="btn btn-info" type="button" (click)="onAddSport()">
-          Add Sport
-        </button>
-        <div
-          class="form-group"
-          *ngFor="let sportControl of controls; let i = index"
-          [formGroupName]="i"
-        >
-          <div class="row mt-3">
-            <div class="col-md-8">
-              <input type="text" class="form-control" formControlName="name" />
+          " class="help-block">
+                    Email Or Phone is Required
+                </span>
             </div>
-            <div class="col-md-2">
-              <input
-                class="form-control"
-                type="number"
-                formControlName="pYear"
-              />
+            <br />
+            Gender
+            <div class="radio">
+                <label>
+                    <input type="radio" formControlName="gender" value="Male" />Male
+                </label>
+                <label>
+                    <input type="radio" formControlName="gender" value="Female" />Female
+                </label>
             </div>
-            <div class="col-md-2">
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="onDeleteSport(i)"
-              >
-                X
-              </button>
+            <br />
+            <div formArrayName="sports">
+                <h4>Add Your Favorite Sports</h4>
+                <button class="btn btn-info" type="button" (click)="onAddSport()">
+                    Add Sport
+                </button>
+                <div class="form-group" *ngFor="let sportControl of controls; let i = index" [formGroupName]="i">
+                    <div class="row mt-3">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="name" />
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" type="number" formControlName="pYear" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger" (click)="onDeleteSport(i)">
+                                X
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <br />
-      <span
-        *ngIf="!practiceForm.valid && practiceForm.touched"
-        class="help-block"
-        >Please Enter valid Data</span
-      >
-      <div class="text-center">
-        <button
-          class="btn btn-primary"
-          [disabled]="!practiceForm.valid"
-          type="submit"
-        >
-          {{ id ? "Update" : "Add New" }}
-        </button>
-      </div>
-    </form>
-  </div>
+            <br />
+            <span *ngIf="!practiceForm.valid && practiceForm.touched" class="help-block">Please Enter valid Data</span>
+            <div class="text-center">
+                <button class="btn btn-primary" [disabled]="!practiceForm.valid" type="submit">
+                    {{ id ? "Update" : "Add New" }}
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

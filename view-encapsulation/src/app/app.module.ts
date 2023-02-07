@@ -13,6 +13,10 @@ import { QparamsuserComponent } from './qparamsuser/qparamsuser.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortenPipe } from './shorten.pipe';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
+import { TbodyComponent } from './qparamsuser/tbody/tbody.component';
+import { TheadComponent } from './qparamsuser/thead/thead.component';
+import { OrderByPipe } from './order-by.pipe';
+import { TablePaginatorComponent } from './table-paginator/table-paginator.component';
 
 
 
@@ -39,7 +43,11 @@ const appRoutes: Routes = [
     QparamsComponent,
     QparamsuserComponent,
     ShortenPipe,
-    LifeCycleComponent
+    LifeCycleComponent,
+    TbodyComponent,
+    TheadComponent,
+    OrderByPipe,
+    TablePaginatorComponent
   ],
   imports: [
     BrowserModule,

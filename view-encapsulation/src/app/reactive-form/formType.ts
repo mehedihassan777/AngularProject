@@ -1,7 +1,8 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface UserFormType {
-  name: FormControl<string>;
+  fname: FormControl<string>;
+  lname: FormControl<string>;
   email: FormControl<string | null>;
   phone: FormControl<number | null>;
   gender: FormControl<string>;

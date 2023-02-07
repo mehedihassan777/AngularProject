@@ -18,7 +18,7 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
     private router: Router,
     private route: ActivatedRoute,
     private userSer: UsersService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm();
@@ -83,7 +83,10 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
     if (this.practiceForm.valid) {
       const formUser = this.practiceForm.value as User;
       if (this.id) this.userSer.updateUser({ ...formUser, id: this.id });
-      else this.userSer.addUser(formUser);
+      else {
+        formUser.id = Math.max(...this.userSer.users.map(user => { return user.id })) + 1;
+        this.userSer.addUser(formUser);
+      }
 
       this.router.navigate(['/qpramsuser']);
     }
@@ -91,7 +94,8 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
 
   private createForm() {
     this.practiceForm = new FormGroup<UserFormType>({
-      name: new FormControl('', [Validators.required]),
+      fname: new FormControl('', [Validators.required]),
+      lname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required]),
       gender: new FormControl('Male'),

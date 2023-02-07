@@ -13,6 +13,7 @@ import { UsersService } from '../users.service';
 export class QparamsuserComponent {
 
   users: User[] = [];
+  searchName: string;
   subUser: Subscription;
 
   constructor(private router: Router, private userSer: UsersService) { }
@@ -26,10 +27,4 @@ export class QparamsuserComponent {
 
   }
 
-  onEdit(id: number) {
-    this.router.navigate(['rform', id]);
-  }
-  onDelete(id: number) {
-    this.userSer.deleteUser(id);
-  }
 }
