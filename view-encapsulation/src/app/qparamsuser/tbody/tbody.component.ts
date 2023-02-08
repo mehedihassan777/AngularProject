@@ -74,14 +74,18 @@ export class TbodyComponent implements OnChanges, OnInit {
 
   private searchUser() {
     this.userSer.pageNumber.next(1);
-    const searchUsers = this.allUsers.filter(user => {
+    let searchUsers = this.allUsers.filter(user => {
       return user.fname.toLowerCase().match(this.search.toLowerCase());
     });
+
+    if(searchUsers.length<=0)
+      searchUsers = this.allUsers.filter(user => {
+        return user.lname.toLowerCase().match(this.search.toLowerCase());
+      });
 
     if (searchUsers.length > 10) {
       this.users = searchUsers;
       this.userSer.userNumber.next(this.users.length);
-      console.log(this.users.length);
       this.paginate(1);
     }
     else {
