@@ -8,6 +8,7 @@ export class AuthService {
     constructor(private userSer: UsersService){}
 
     login(inpUsername: string, password: string) {
+        if (this.userSer.users.findIndex((x) => x.email == inpUsername || x.phone == +inpUsername) != -1)
         if (this.userSer.users[this.userSer.users.findIndex((x) => x.email == inpUsername || x.phone == +inpUsername)].password == password)
         this.loggedIn = true;
     }
