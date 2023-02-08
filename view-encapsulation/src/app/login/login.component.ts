@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData) {
-    this.authSer.login(formData.value.username, formData.value.password);
-    this.router.navigate(['/qpramsuser'])
+    if (formData.valid) {
+      this.authSer.login(formData.value.username, formData.value.password);
+      this.router.navigate(['/qpramsuser']);
+    }
+
   }
 }
