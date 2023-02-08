@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.userSer.users = this.setUsers;
-    this.userSer.pageNumber.next(1);
   }
 
 }

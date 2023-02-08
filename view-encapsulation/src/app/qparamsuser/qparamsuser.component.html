@@ -12,11 +12,11 @@
   <br />
   <hr />
   <div class="row">
-    <table class="table">
-      <!-- <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead> -->
-      <app-tbody [search]="searchName" [allUsers]="users" [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-tbody>
-    </table>
-    
+    <!-- <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead> -->
+    <app-tbody [search]="searchName" [allUsers]="users"
+      [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-tbody>
+    <app-table-paginator></app-table-paginator>
+
   </div>
 </div>
 

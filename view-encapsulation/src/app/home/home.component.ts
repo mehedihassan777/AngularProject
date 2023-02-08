@@ -11,6 +11,6 @@ export class HomeComponent {
   constructor(private router: Router) { }
 
   onNavigate() {
-    this.router.navigate(['/qprams'], { queryParams: { id: 3 } });
+    this.router.navigate(['/qpramsuser']);
   }
 }

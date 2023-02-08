@@ -15,29 +15,24 @@ export class TbodyComponent implements OnChanges, OnInit {
 
   users: User[] = [];
   loadUsers: User[] = [];
-  searchUsers: User[] = [];
-  paginator = false;
   sortKey: string = '';
-  reverse = true;
-  currentPage: number = 1;
+  toggle = true;
 
   constructor(private router: Router, private userSer: UsersService) { }
 
   ngOnInit() {
-    if (this.allUsers.length > 10) {
-      this.paginate();
-    }
-
+    if (this.allUsers.length > 10)
+      this.paginate(1);
     else
       this.users = this.allUsers;
+
     this.userSer.pageNumber.subscribe(value => {
-      this.currentPage = value;
-      this.paginate();
+      this.paginate(value);
     });
     this.userSer.userChanged.subscribe(message => {
       console.log(message);
       this.ngOnChanges();
-    })
+    });
   }
 
   ngOnChanges(): void {
@@ -45,14 +40,14 @@ export class TbodyComponent implements OnChanges, OnInit {
       this.userSer.pageNumber.next(1);
       this.users = this.allUsers;
       this.userSer.userNumber.next(this.users.length);
-      this.paginate();
+      this.paginate(1);
     }
 
     else
       this.searchUser();
   }
 
-  onClick(heading) {
+  private onClick(heading) {
     switch (heading) {
       case 'Index':
         this.sort('id');
@@ -79,34 +74,32 @@ export class TbodyComponent implements OnChanges, OnInit {
 
   private searchUser() {
     this.userSer.pageNumber.next(1);
-    this.searchUsers = this.allUsers.filter(user => {
+    const searchUsers = this.allUsers.filter(user => {
       return user.fname.toLowerCase().match(this.search.toLowerCase());
     });
 
-    if (this.searchUsers.length > 10) {
-      this.users = this.searchUsers;
+    if (searchUsers.length > 10) {
+      this.users = searchUsers;
       this.userSer.userNumber.next(this.users.length);
       console.log(this.users.length);
-      this.paginate();
+      this.paginate(1);
     }
     else {
-      this.loadUsers = this.searchUsers;
-      this.users = this.searchUsers;
+      this.loadUsers = searchUsers;
+      this.users = searchUsers;
       this.userSer.userNumber.next(this.users.length);
-      this.paginator = false;
     }
 
   }
 
   private sort(key: string) {
     this.sortKey = key;
-    this.reverse = !this.reverse;
+    this.toggle = !this.toggle;
   }
 
-  private paginate() {
-    this.paginator = true;
+  private paginate(currentPage) {
     this.loadUsers = [];
-    for (let i = (this.currentPage - 1) * 10; i < this.currentPage * 10; i++) {
+    for (let i = (currentPage - 1) * 10; i < currentPage * 10; i++) {
       if (this.users[i])
         this.loadUsers.push(this.users[i]);
     }
