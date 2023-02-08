@@ -21,13 +21,15 @@ export class TbodyComponent implements OnChanges, OnInit {
   constructor(private router: Router, private userSer: UsersService) { }
 
   ngOnInit() {
-    if (this.allUsers.length > 10)
-      this.paginate(1);
-    else
+    if (this.allUsers.length < 10)
       this.users = this.allUsers;
 
     this.userSer.pageNumber.subscribe(value => {
-      this.paginate(value);
+      console.log(value);
+      if(value)
+        this.paginate(value);
+      else
+        this.paginate(1);
     });
     this.userSer.userChanged.subscribe(message => {
       console.log(message);
@@ -37,7 +39,6 @@ export class TbodyComponent implements OnChanges, OnInit {
 
   ngOnChanges(): void {
     if (this.search == '' || !this.search) {
-      this.userSer.pageNumber.next(1);
       this.users = this.allUsers;
       this.userSer.userNumber.next(this.users.length);
       this.paginate(1);
