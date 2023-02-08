@@ -93,7 +93,7 @@
             <br />
             <span *ngIf="!practiceForm.valid && practiceForm.touched" class="help-block">Please Enter valid Data</span>
             <div class="text-center">
-                <button class="btn btn-primary" [disabled]="!practiceForm.valid || practiceForm.value.password != practiceForm.value.cPassword" type="submit">
+                <button class="btn btn-primary" [disabled]="!practiceForm.valid || practiceForm.value.password != practiceForm.value.cPassword && practiceForm.value.cPassword !=''" type="submit">
                     {{ id ? "Update" : "Sign Up" }}
                 </button>
             </div>

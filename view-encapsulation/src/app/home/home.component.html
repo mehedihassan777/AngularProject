@@ -26,7 +26,7 @@
                 <a routerLink="/lifecycle" class="col-md-12 btn btn-info">5. Component Life Cycle Hooks</a>
             </div>
 
-            <div class="mt-4">
+            <div *ngIf="!loggedIn" class="mt-4">
                 <div class="text-center">
                     <a routerLink="/login" class="btn btn-success">Login</a>
                 </div>
