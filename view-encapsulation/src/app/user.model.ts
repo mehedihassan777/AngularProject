@@ -6,6 +6,7 @@ export interface User {
     lname: string;
     email?: string;
     phone?: number;
+    password: string;
     gender: string;
     sports: Sport[];
 }

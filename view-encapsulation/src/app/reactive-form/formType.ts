@@ -5,6 +5,8 @@ export interface UserFormType {
   lname: FormControl<string>;
   email: FormControl<string | null>;
   phone: FormControl<number | null>;
+  password: FormControl<string>;
+  cPassword?: FormControl<string>;
   gender: FormControl<string>;
   sports: FormArray<FormGroup>;
 }

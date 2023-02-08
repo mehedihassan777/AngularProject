@@ -98,12 +98,16 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
       lname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      cPassword: new FormControl('', [Validators.required]),
       gender: new FormControl('Male'),
       sports: new FormArray([]),
     });
   }
 
   private loadForm(user: User) {
+    this.practiceForm.controls['cPassword'].clearValidators();
+    this.practiceForm.controls['cPassword'].updateValueAndValidity();
     this.practiceForm.patchValue(user);
     if (user.sports?.length) {
       user.sports.map((sport) => this.onAddSport(sport));
