@@ -19,6 +19,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { TablePaginatorComponent } from './table-paginator/table-paginator.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './login/auth-guard.service';
 
 
 
@@ -28,9 +29,9 @@ const appRoutes: Routes = [
   { path: 'parent', component: ParentComponent },
   { path: 'tdform', component: TdFormComponent },
   { path: 'rform', component: ReactiveFormComponent },
-  { path: 'rform/:id', component: ReactiveFormComponent },
+  { path: 'rform/:id', canActivate: [AuthGuard], component: ReactiveFormComponent },
   { path: 'qprams', component: QparamsComponent },
-  { path: 'qpramsuser', component: QparamsuserComponent },
+  { path: 'qpramsuser', canActivate: [AuthGuard], component: QparamsuserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'lifecycle', component: LifeCycleComponent }
 ]
