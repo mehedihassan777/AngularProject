@@ -7,17 +7,16 @@ import { UsersService } from '../users.service';
   styleUrls: ['./table-paginator.component.css']
 })
 export class TablePaginatorComponent implements OnInit {
-
   pages = [];
+  currentPage: number = 1;
 
   constructor(private userSer: UsersService) {
     this.makePage(this.userSer.users.length);
   }
 
   ngOnInit(): void {
-    let currentPage = 1;
     this.userSer.pageNumber.subscribe(value => {
-      currentPage = value;
+      this.currentPage = value;
     });
     this.userSer.userNumber.subscribe(value => {
       this.makePage(value);
