@@ -17,6 +17,7 @@ import { TbodyComponent } from './qparamsuser/tbody/tbody.component';
 import { TheadComponent } from './qparamsuser/thead/thead.component';
 import { OrderByPipe } from './order-by.pipe';
 import { TablePaginatorComponent } from './table-paginator/table-paginator.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     TbodyComponent,
     TheadComponent,
     OrderByPipe,
-    TablePaginatorComponent
+    TablePaginatorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
