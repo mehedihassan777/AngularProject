@@ -20,6 +20,7 @@ import { TablePaginatorComponent } from './table-paginator/table-paginator.compo
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './login/auth-guard.service';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     OrderByPipe,
     TablePaginatorComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

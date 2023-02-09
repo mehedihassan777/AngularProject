@@ -11,7 +11,7 @@ import { UsersService } from '../users.service';
 export class QparamsuserComponent {
 
   users: User[] = [];
-  searchName: string;
+  searchName: string = '';
 
   constructor(private router: Router, private userSer: UsersService) { }
 
