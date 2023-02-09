@@ -7,8 +7,13 @@
   <hr />
   <div class="row">
     <table>
-      <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead><br>
-      <app-tbody [search]="searchName" [allUsers]="users"></app-tbody>
+      <thead>
+        <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead><br>
+      </thead>
+      <tbody>
+        <app-tbody [search]="searchName" [allUsers]="users"></app-tbody>
+      </tbody>
+      
     </table>
   </div>
   <br>

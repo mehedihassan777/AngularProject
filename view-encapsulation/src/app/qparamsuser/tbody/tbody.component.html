@@ -1,4 +1,4 @@
-<tbody>
+
     <tr *ngFor="let user of loadUsers | sortBy: sortKey: toggle ; let i = index">
         <!-- <td>{{ i+1 }}</td> -->
         <td>{{ user.id }}</td>
@@ -12,4 +12,3 @@
             <button type="button" class="btn btn-danger" (click)="onDelete(user.id)">X</button>
         </td>
     </tr>
-</tbody>
