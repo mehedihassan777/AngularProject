@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AuthService } from './login/auth.service';
 import { Sport } from './sports.model';
 import { User } from './user.model';
 import { UsersService } from './users.service';
@@ -38,10 +39,11 @@ export class AppComponent implements OnInit {
     { id: 24, fname: 'Ann ', lname: 'White', email: 'mehadilemon160@gmail.com', phone: 1773696417, password: '12345', gender: 'Female', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] }
   ];
 
-  constructor(private userSer: UsersService) { }
+  constructor(private userSer: UsersService, private authSer: AuthService) { }
 
   ngOnInit(): void {
     this.userSer.users = this.setUsers;
+    this.authSer.autoLogin();
   }
 
 }

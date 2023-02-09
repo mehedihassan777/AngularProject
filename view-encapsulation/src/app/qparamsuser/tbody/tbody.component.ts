@@ -16,7 +16,7 @@ export class TbodyComponent implements OnChanges, OnInit {
   users: User[] = [];
   loadUsers: User[] = [];
   sortKey: string = '';
-  toggle = true;
+  toggle = false;
 
   constructor(private router: Router, private userSer: UsersService) { }
 
@@ -25,8 +25,7 @@ export class TbodyComponent implements OnChanges, OnInit {
       this.users = this.allUsers;
 
     this.userSer.pageNumber.subscribe(value => {
-      console.log(value);
-      if(value)
+      if (value)
         this.paginate(value);
       else
         this.paginate(1);
@@ -79,7 +78,7 @@ export class TbodyComponent implements OnChanges, OnInit {
       return user.fname.toLowerCase().match(this.search.toLowerCase());
     });
 
-    if(searchUsers.length<=0)
+    if (searchUsers.length <= 0)
       searchUsers = this.allUsers.filter(user => {
         return user.lname.toLowerCase().match(this.search.toLowerCase());
       });
