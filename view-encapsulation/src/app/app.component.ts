@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, DoCheck, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './login/auth.service';
 import { Sport } from './sports.model';
 import { User } from './user.model';
@@ -9,8 +10,9 @@ import { UsersService } from './users.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   title = 'view-encapsulation';
+  autoLogout;
 
   setUsers: User[] = [
     { id: 1, fname: 'Mehedi', lname: 'Hassan', email: 'mehadihassan170@gmail.com', phone: 1731192089, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
@@ -44,6 +46,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userSer.users = this.setUsers;
     this.authSer.autoLogin();
+    //this.autoLogout = setTimeout(this.logOut, 10000);
+  }
+
+  ngDoCheck(): void {
+    // clearTimeout(this.autoLogout);
+    // this.autoLogout = setTimeout(this.logOut, 10000);
   }
 
 }

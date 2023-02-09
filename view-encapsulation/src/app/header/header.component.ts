@@ -20,7 +20,6 @@ export class HeaderComponent {
 
   onLogOut() {
     this.authSer.logout();
-    this.router.navigate(['/home']);
   }
 
 }
