@@ -6,14 +6,14 @@
   <br />
   <hr />
   <div class="row">
-    <!-- <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead> -->
-    <app-tbody [search]="searchName" [allUsers]="users"
-      [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-tbody>
-    <app-table-paginator></app-table-paginator>
-
+    <table>
+      <app-thead [headings]="['Index','First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action']"></app-thead><br>
+      <app-tbody [search]="searchName" [allUsers]="users"></app-tbody>
+    </table>
   </div>
+  <br>
+  <app-table-paginator></app-table-paginator>
 </div>
-
 <!-- 
 <data-table-search></data-table-search> //Will contain a search field on Fullname.
 <data-table-header></user-table-header> // First Name, Last name, Email, Phone, Gender

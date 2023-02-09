@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
@@ -6,7 +6,8 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-qparamsuser',
   templateUrl: './qparamsuser.component.html',
-  styleUrls: ['./qparamsuser.component.css']
+  styleUrls: ['./qparamsuser.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class QparamsuserComponent {
 

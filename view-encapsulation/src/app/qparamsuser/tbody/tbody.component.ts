@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user.model';
 import { UsersService } from 'src/app/users.service';
@@ -6,7 +6,8 @@ import { UsersService } from 'src/app/users.service';
 @Component({
   selector: 'app-tbody',
   templateUrl: './tbody.component.html',
-  styleUrls: ['./tbody.component.css']
+  styleUrls: ['./tbody.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TbodyComponent implements OnChanges, OnInit {
   @Input() allUsers: User[] = [];
@@ -34,6 +35,8 @@ export class TbodyComponent implements OnChanges, OnInit {
       console.log(message);
       this.ngOnChanges();
     });
+
+    this.userSer.userSort.subscribe(value => this.onClick(value));
   }
 
   ngOnChanges(): void {
