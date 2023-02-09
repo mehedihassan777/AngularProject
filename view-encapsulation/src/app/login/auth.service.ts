@@ -5,6 +5,7 @@ import { UsersService } from "../users.service";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     loggedIn = false;
+    autoLogoutHandler;
 
     constructor(private userSer: UsersService, private router: Router) { }
 
@@ -24,9 +25,16 @@ export class AuthService {
             return;
     }
 
+    autoLogout(time: number) {
+        this.autoLogoutHandler = setTimeout(() => {
+            this.logout();
+        }, time);
+    }
+
     logout() {
         localStorage.clear();
         this.loggedIn = false;
         this.router.navigate(['/home']);
+        clearTimeout(this.autoLogoutHandler);
     }
 }

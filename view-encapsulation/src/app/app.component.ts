@@ -46,12 +46,11 @@ export class AppComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.userSer.users = this.setUsers;
     this.authSer.autoLogin();
-    //this.autoLogout = setTimeout(this.logOut, 10000);
   }
 
   ngDoCheck(): void {
-    // clearTimeout(this.autoLogout);
-    // this.autoLogout = setTimeout(this.logOut, 10000);
+    clearTimeout(this.authSer.autoLogoutHandler);
+    this.authSer.autoLogout(60000);
   }
 
 }
