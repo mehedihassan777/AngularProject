@@ -30,11 +30,11 @@ const appRoutes: Routes = [
   { path: 'parent', component: ParentComponent },
   { path: 'tdform', component: TdFormComponent },
   { path: 'rform', component: ReactiveFormComponent },
-  // { path: 'rform/:id', canActivate: [AuthGuard], component: ReactiveFormComponent },
-  { path: 'rform/:id', component: ReactiveFormComponent },
+  { path: 'rform/:id', canActivate: [AuthGuard], component: ReactiveFormComponent },
+  // { path: 'rform/:id', component: ReactiveFormComponent },
   { path: 'qprams', component: QparamsComponent },
-  // { path: 'qpramsuser', canActivate: [AuthGuard], component: QparamsuserComponent },
-  { path: 'qpramsuser', component: QparamsuserComponent },
+  { path: 'qpramsuser', canActivate: [AuthGuard], component: QparamsuserComponent },
+  // { path: 'qpramsuser', component: QparamsuserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'lifecycle', component: LifeCycleComponent }
 ]
