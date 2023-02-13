@@ -52,13 +52,8 @@ export class QparamsuserComponent {
   private searchUser(searchName) {
     this.userSer.pageNumber.next(1);
     let searchUsers = this.userSer.users.filter(user => {
-      return user.fname.toLowerCase().match(searchName.toLowerCase());
+      return user.fname.toLowerCase().match(searchName.toLowerCase()) || user.lname.toLowerCase().match(searchName.toLowerCase());
     });
-
-    if (searchUsers.length <= 0)
-      searchUsers = this.userSer.users.filter(user => {
-        return user.lname.toLowerCase().match(searchName.toLowerCase());
-      });
 
     if (searchUsers.length > 10) {
       this.users = searchUsers;
