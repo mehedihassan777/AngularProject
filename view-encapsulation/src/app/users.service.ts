@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from './user.model';
@@ -9,6 +10,14 @@ export class UsersService {
     userSort = new Subject<string>();
     pageNumber = new Subject<number>();
     userNumber = new Subject<number>();
+
+    constructor(private http: HttpClient) { }
+
+    setUsers() {
+        this.http.get<User[]>('https://mehedihassan.xyz/api/emp/read.php').subscribe(users => {
+            this.users = users;
+        });
+    }
 
     getUser(id: number) {
         return this.users[this.users.findIndex((x) => x.id == id)];
