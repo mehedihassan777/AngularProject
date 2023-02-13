@@ -1,31 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../users.service';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-table-paginator',
   templateUrl: './table-paginator.component.html',
   styleUrls: ['./table-paginator.component.css']
 })
-export class TablePaginatorComponent implements OnInit {
+export class TablePaginatorComponent implements OnChanges {
   pages = [];
-  currentPage: number = 1;
+  @Input() currentPage: number;
+  @Input() userNumber: number;
+  @Output() nextPage = new EventEmitter<number>();
 
-  constructor(private userSer: UsersService) {
-    this.makePage(this.userSer.users.length);
-  }
-
-  ngOnInit(): void {
-    this.userSer.pageNumber.subscribe(value => {
-      this.currentPage = value;
-    });
-    this.userSer.userNumber.subscribe(value => {
-      this.makePage(value);
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    this.makePage(this.userNumber);
   }
 
   private changePage(pageNumber: number) {
     if (pageNumber > 0 && pageNumber <= this.pages.length)
-      this.userSer.pageNumber.next(pageNumber);
+      this.nextPage.emit(pageNumber);
   }
 
   private makePage(users: number) {

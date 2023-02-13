@@ -8,8 +8,6 @@ export class UsersService {
     users: User[] = [];
     userChanged = new Subject<string>();
     userSort = new Subject<string>();
-    pageNumber = new Subject<number>();
-    userNumber = new Subject<number>();
 
     constructor(private http: HttpClient) { }
 

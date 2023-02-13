@@ -12,7 +12,7 @@
     </table>
   </div>
   <br>
-  <app-table-paginator></app-table-paginator>
+  <app-table-paginator [currentPage]="currentPage" [userNumber]="users.length" (nextPage)="changePage($event)"></app-table-paginator>
 </div>
 <!-- 
 <data-table-search></data-table-search> //Will contain a search field on Fullname.

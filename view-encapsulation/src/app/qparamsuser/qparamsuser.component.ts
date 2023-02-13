@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
 
@@ -13,6 +12,7 @@ export class QparamsuserComponent {
 
   users: User[] = [];
   loadUsers: User[] = [];
+  currentPage: number = 1;
   headings: string[] = ['Index', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
 
   constructor(private userSer: UsersService) { }
@@ -24,23 +24,27 @@ export class QparamsuserComponent {
     else
       this.loadUsers = this.users;
 
-    this.userSer.pageNumber.subscribe(value => {
-      if (value)
-        this.paginate(value);
-      else
-        this.paginate(1);
-    });
     this.userSer.userChanged.subscribe(message => {
       console.log(message);
       this.searchInput('');
     });
+  }
 
+  changePage(pageNumber: number) {
+    if (pageNumber) {
+      this.currentPage = pageNumber;
+      this.paginate(pageNumber);
+    }
+
+    else {
+      this.currentPage = 1;
+      this.paginate(1);
+    }
   }
 
   searchInput(input: string) {
     if (input == '' || !input) {
       this.users = this.userSer.users;
-      this.userSer.userNumber.next(this.users.length);
       this.paginate(1);
     }
 
@@ -50,20 +54,18 @@ export class QparamsuserComponent {
 
 
   private searchUser(searchName) {
-    this.userSer.pageNumber.next(1);
+    this.currentPage = 1;
     let searchUsers = this.userSer.users.filter(user => {
       return user.fname.toLowerCase().match(searchName.toLowerCase()) || user.lname.toLowerCase().match(searchName.toLowerCase());
     });
 
     if (searchUsers.length > 10) {
       this.users = searchUsers;
-      this.userSer.userNumber.next(this.users.length);
       this.paginate(1);
     }
     else {
       this.loadUsers = searchUsers;
       this.users = searchUsers;
-      this.userSer.userNumber.next(this.users.length);
     }
 
   }
