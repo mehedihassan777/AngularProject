@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 })
 export class TablePaginatorComponent implements OnChanges {
   pages = [];
+  loadPages = [];
   @Input() currentPage: number;
   @Input() userNumber: number;
   @Output() nextPage = new EventEmitter<number>();
@@ -22,8 +23,25 @@ export class TablePaginatorComponent implements OnChanges {
 
   private makePage(users: number) {
     this.pages = [];
-    for (let i = 0; i < users / 10; i++) {
+    let index = 0;
+    for (let i = 0; i < users / 5; i++) {
       this.pages.push(i + 1);
     }
+    if (this.currentPage <= 2)
+      for (let i = 0; i < 3; i++){
+        this.loadPages[index] = this.pages[i];
+        index++;
+      }
+        
+    else if (this.currentPage >= this.pages[this.pages.length-2])
+      for (let i = this.pages.length - 3; i < this.pages.length; i++) {
+        this.loadPages[index] = this.pages[i];
+        index++;
+      }
+    else
+      for (let i = this.currentPage - 2; i < this.currentPage + 1; i++) {
+        this.loadPages[index] = this.pages[i];
+        index++;
+      }
   }
 }
