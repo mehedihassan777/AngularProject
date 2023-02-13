@@ -44,8 +44,8 @@ export class AppComponent implements OnInit, DoCheck {
   constructor(private userSer: UsersService, private authSer: AuthService) { }
 
   ngOnInit(): void {
-    //this.userSer.users = this.setUsers;
-    this.userSer.setUsers();
+    this.userSer.users = this.setUsers;
+    //this.userSer.setUsers();
     this.authSer.autoLogin();
   }
 
