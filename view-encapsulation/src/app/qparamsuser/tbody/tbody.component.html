@@ -1,5 +1,5 @@
 <tbody>
-    <tr *ngFor="let user of loadUsers | sortBy: sortKey: toggle ; let i = index">
+    <tr *ngFor="let user of allUsers | sortBy: sortKey: toggle ; let i = index">
         <!-- <td>{{ i+1 }}</td> -->
         <td>{{ user.id }}</td>
         <td>{{ user.fname }}</td>

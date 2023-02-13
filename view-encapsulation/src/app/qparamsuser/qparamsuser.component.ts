@@ -12,12 +12,73 @@ import { UsersService } from '../users.service';
 export class QparamsuserComponent {
 
   users: User[] = [];
-  searchName: string = '';
+  loadUsers: User[] = [];
+  headings: string[] = ['Index', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
 
-  constructor(private router: Router, private userSer: UsersService) { }
+  constructor(private userSer: UsersService) { }
 
   ngOnInit(): void {
     this.users = this.userSer.users;
+    if (this.users.length > 10)
+      this.paginate(1);
+    else
+      this.loadUsers = this.users;
+
+    this.userSer.pageNumber.subscribe(value => {
+      if (value)
+        this.paginate(value);
+      else
+        this.paginate(1);
+    });
+    this.userSer.userChanged.subscribe(message => {
+      console.log(message);
+      this.searchInput('');
+    });
+
+  }
+
+  searchInput(input: string) {
+    if (input == '' || !input) {
+      this.users = this.userSer.users;
+      this.userSer.userNumber.next(this.users.length);
+      this.paginate(1);
+    }
+
+    else
+      this.searchUser(input);
+  }
+
+
+  private searchUser(searchName) {
+    this.userSer.pageNumber.next(1);
+    let searchUsers = this.userSer.users.filter(user => {
+      return user.fname.toLowerCase().match(searchName.toLowerCase());
+    });
+
+    if (searchUsers.length <= 0)
+      searchUsers = this.userSer.users.filter(user => {
+        return user.lname.toLowerCase().match(searchName.toLowerCase());
+      });
+
+    if (searchUsers.length > 10) {
+      this.users = searchUsers;
+      this.userSer.userNumber.next(this.users.length);
+      this.paginate(1);
+    }
+    else {
+      this.loadUsers = searchUsers;
+      this.users = searchUsers;
+      this.userSer.userNumber.next(this.users.length);
+    }
+
+  }
+
+  private paginate(currentPage) {
+    this.loadUsers = [];
+    for (let i = (currentPage - 1) * 10; i < currentPage * 10; i++) {
+      if (this.users[i])
+        this.loadUsers.push(this.users[i]);
+    }
   }
 
 }
