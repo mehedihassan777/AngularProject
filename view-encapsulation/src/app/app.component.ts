@@ -38,7 +38,8 @@ export class AppComponent implements OnInit, DoCheck {
     { id: 21, fname: 'Mehedi', lname: 'Hassan', email: 'mehadihassan170@gmail.com', phone: 1731192089, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
     { id: 22, fname: 'Mehedi', lname: 'Hassan', email: 'mehadihassan170@gmail.com', phone: 1731192089, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
     { id: 23, fname: 'Mehedi', lname: 'Hassan', email: 'mehadihassan170@gmail.com', phone: 1731192089, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
-    { id: 24, fname: 'Ann ', lname: 'White', email: 'mehadilemon160@gmail.com', phone: 1773696417, password: '12345', gender: 'Female', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] }
+    { id: 24, fname: 'Test', lname: 'User', email: 'test@gmail.com', phone: 12345, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },
+    { id: 25, fname: 'Ann ', lname: 'White', email: 'mehadilemon160@gmail.com', phone: 1773696417, password: '12345', gender: 'Female', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] }
   ];
 
   constructor(private userSer: UsersService, private authSer: AuthService) { }
