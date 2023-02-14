@@ -15,7 +15,7 @@ export class QparamsuserComponent {
   currentPage: number = 1;
   itemPerPage: number = 5;
   totalCount: number;
-  headings: string[] = ['Index', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
+  headings: string[] = ['Index', 'Id', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
   sortKey: string;
   toggle = false;
 
@@ -30,7 +30,7 @@ export class QparamsuserComponent {
 
   onClick(heading) {
     switch (heading) {
-      case 'Index':
+      case 'Id':
         this.sort('id');
         break;
       case 'First Name':
