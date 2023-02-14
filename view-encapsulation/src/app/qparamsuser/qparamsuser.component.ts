@@ -32,15 +32,8 @@ export class QparamsuserComponent {
   }
 
   changePage(pageNumber: number) {
-    if (pageNumber) {
       this.currentPage = pageNumber;
       this.paginate(pageNumber);
-    }
-
-    else {
-      this.currentPage = 1;
-      this.paginate(1);
-    }
   }
 
   searchInput(input: string) {
@@ -48,7 +41,6 @@ export class QparamsuserComponent {
       this.users = this.userSer.users;
       this.paginate(1);
     }
-
     else
       this.searchUser(input);
   }
