@@ -19,7 +19,7 @@ export class QparamsuserComponent {
 
   ngOnInit(): void {
     this.users = this.userSer.users;
-    if (this.users.length > 10)
+    if (this.users.length > 5)
       this.paginate(1);
     else
       this.loadUsers = this.users;
@@ -59,7 +59,7 @@ export class QparamsuserComponent {
       return user.fname.toLowerCase().match(searchName.toLowerCase()) || user.lname.toLowerCase().match(searchName.toLowerCase());
     });
 
-    if (searchUsers.length > 10) {
+    if (searchUsers.length > 5) {
       this.users = searchUsers;
       this.paginate(1);
     }

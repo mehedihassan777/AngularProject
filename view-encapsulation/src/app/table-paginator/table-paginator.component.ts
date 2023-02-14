@@ -28,7 +28,13 @@ export class TablePaginatorComponent implements OnChanges {
     for (let i = 0; i < users / itemPerPage; i++) {
       this.pages.push(i + 1);
     }
-    if (this.currentPage <= 2)
+    if (this.pages.length < 3) {
+      this.loadPages = [];
+      for (let i = 0; i < this.pages.length; i++){
+        this.loadPages[i] = i+1;
+      }
+    }
+    else if (this.currentPage <= 2)
       for (let i = 0; i < 3; i++) {
         this.loadPages[index] = this.pages[i];
         index++;
