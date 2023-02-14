@@ -1,7 +1,5 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from './login/auth.service';
-import { Sport } from './sports.model';
 import { User } from './user.model';
 import { UsersService } from './users.service';
 
