@@ -9,16 +9,17 @@ export class TablePaginatorComponent implements OnChanges {
   pages = [];
   loadPages = [];
   @Input() currentPage: number;
-  @Input() userNumber: number;
-  @Output() nextPage = new EventEmitter<number>();
+  @Input() totalCount: number;
+  @Input() itemPerPage: number;
+  @Output() pageChanges = new EventEmitter<number>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.makePage(this.userNumber);
+    this.makePage(this.totalCount);
   }
 
   private changePage(pageNumber: number) {
     if (pageNumber > 0 && pageNumber <= this.pages.length)
-      this.nextPage.emit(pageNumber);
+      this.pageChanges.emit(pageNumber);
   }
 
   private makePage(users: number) {
@@ -30,8 +31,8 @@ export class TablePaginatorComponent implements OnChanges {
     }
     if (this.pages.length < 3) {
       this.loadPages = [];
-      for (let i = 0; i < this.pages.length; i++){
-        this.loadPages[i] = i+1;
+      for (let i = 0; i < this.pages.length; i++) {
+        this.loadPages[i] = i + 1;
       }
     }
     else if (this.currentPage <= 2)

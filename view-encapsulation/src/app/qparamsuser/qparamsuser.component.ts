@@ -10,36 +10,65 @@ import { UsersService } from '../users.service';
 })
 export class QparamsuserComponent {
 
-  users: User[] = [];
+  searchUsers: User[] = [];
   loadUsers: User[] = [];
   currentPage: number = 1;
+  itemPerPage: number = 5;
+  totalCount: number;
   headings: string[] = ['Index', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
+  sortKey: string;
+  toggle = false;
 
   constructor(private userSer: UsersService) { }
 
   ngOnInit(): void {
-    this.users = this.userSer.users;
-    if (this.users.length > 5)
-      this.paginate(1);
-    else
-      this.loadUsers = this.users;
-
+    this.loadPage();
     this.userSer.userChanged.subscribe(() => {
-      this.users = this.userSer.users;
-      this.loadUsers.length < 2 ? this.currentPage -= 1 : '';
-      this.paginate(this.currentPage);
+      this.loadPage();
     });
   }
 
+  onClick(heading) {
+    switch (heading) {
+      case 'Index':
+        this.sort('id');
+        break;
+      case 'First Name':
+        this.sort('fname');
+        break;
+      case 'Last Name':
+        this.sort('lname');
+        break;
+      case 'Email':
+        this.sort('email');
+        break;
+      case 'Phone':
+        this.sort('phone');
+        break;
+      case 'Gender':
+        this.sort('gender');
+        break;
+      default:
+        break;
+    }
+  }
+
   changePage(pageNumber: number) {
-      this.currentPage = pageNumber;
-      this.paginate(pageNumber);
+    this.currentPage = pageNumber;
+    this.searchUsers.length > 0 ? this.loadSearch() : this.loadPage();
+
+  }
+
+  onDelete(id: number) {
+    this.userSer.deleteUser(id);
+    this.loadUsers.length < 1 ? this.currentPage -= 1 : '';
+    this.loadPage();
   }
 
   searchInput(input: string) {
     if (input == '' || !input) {
-      this.users = this.userSer.users;
-      this.paginate(1);
+      this.currentPage = 1;
+      this.loadPage();
     }
     else
       this.searchUser(input);
@@ -48,26 +77,34 @@ export class QparamsuserComponent {
 
   private searchUser(searchName) {
     this.currentPage = 1;
-    let searchUsers = this.userSer.users.filter(user => {
+    let findUsers = this.userSer.users.filter(user => {
       return user.fname.toLowerCase().match(searchName.toLowerCase()) || user.lname.toLowerCase().match(searchName.toLowerCase());
     });
+    this.totalCount = findUsers.length;
 
-    if (searchUsers.length > 5) {
-      this.users = searchUsers;
-      this.paginate(1);
+    if (findUsers.length > 5) {
+      this.searchUsers = findUsers;
+      this.loadSearch();
     }
     else {
-      this.loadUsers = searchUsers;
-      this.users = searchUsers;
+      this.loadUsers = findUsers;
+      this.searchUsers = findUsers;
     }
   }
 
-  private paginate(currentPage) {
-    const itemPerPage = 5;
-    this.loadUsers = [];
-    for (let i = (currentPage - 1) * itemPerPage; i < currentPage * itemPerPage; i++) {
-      if (this.users[i])
-        this.loadUsers.push(this.users[i]);
-    }
+  private loadPage() {
+    const data = this.userSer.getUserForPage(this.currentPage, this.itemPerPage);
+    this.loadUsers = data.users;
+    this.totalCount = data.totalUsers;
+  }
+
+  private loadSearch() {
+    this.totalCount = this.searchUsers.length;
+    this.loadUsers = this.searchUsers.slice((this.currentPage - 1) * this.itemPerPage, this.currentPage * this.itemPerPage);
+  }
+
+  private sort(key: string) {
+    this.sortKey = key;
+    this.toggle = !this.toggle;
   }
 }

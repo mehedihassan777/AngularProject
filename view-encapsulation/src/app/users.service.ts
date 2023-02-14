@@ -17,6 +17,10 @@ export class UsersService {
         });
     }
 
+    getUserForPage(currentPage, itemPerPage) {
+        return { users: this.users.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage), totalUsers: this.users.length };
+    }
+
     getUser(id: number) {
         return this.users[this.users.findIndex((x) => x.id == id)];
     }

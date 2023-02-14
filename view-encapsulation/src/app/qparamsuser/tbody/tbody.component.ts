@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user.model';
-import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-tbody',
@@ -11,54 +10,20 @@ import { UsersService } from 'src/app/users.service';
 })
 export class TbodyComponent implements OnInit {
   @Input() allUsers: User[] = [];
-  @Output() deleted = new EventEmitter<string>();
-  sortKey: string = '';
-  toggle = false;
+  @Output() delete = new EventEmitter<number>();
+  @Input() sortKey: string = '';
+  @Input() toggle = false;
 
-  constructor(private router: Router, private userSer: UsersService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.userSer.userSort.subscribe(value => this.onClick(value));
+
   }
-
-
-  private onClick(heading) {
-    switch (heading) {
-      case 'Index':
-        this.sort('id');
-        break;
-      case 'First Name':
-        this.sort('fname');
-        break;
-      case 'Last Name':
-        this.sort('lname');
-        break;
-      case 'Email':
-        this.sort('email');
-        break;
-      case 'Phone':
-        this.sort('phone');
-        break;
-      case 'Gender':
-        this.sort('gender');
-        break;
-      default:
-        break;
-    }
-  }
-
-  private sort(key: string) {
-    this.sortKey = key;
-    this.toggle = !this.toggle;
-  }
-
-
   private onEdit(id: number) {
     this.router.navigate(['rform', id]);
   }
   private onDelete(id: number) {
-    this.userSer.deleteUser(id);
-    this.deleted.emit('User Deleted');
+    this.delete.emit(id);
   }
 
 }

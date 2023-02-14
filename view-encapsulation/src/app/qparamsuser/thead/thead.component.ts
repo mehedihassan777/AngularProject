@@ -9,10 +9,11 @@ import { UsersService } from 'src/app/users.service';
 })
 export class TheadComponent {
   @Input() headings = [];
+  @Output() clicked = new EventEmitter<string>();
 
   constructor(private userSer: UsersService) { }
 
   onClick(heading) {
-    this.userSer.userSort.next(heading);
+    this.clicked.emit(heading);
   }
 }
