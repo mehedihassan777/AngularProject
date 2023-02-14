@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user.model';
 import { UsersService } from 'src/app/users.service';
@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/users.service';
 })
 export class TbodyComponent implements OnInit {
   @Input() allUsers: User[] = [];
+  @Output() deleted = new EventEmitter<string>();
   sortKey: string = '';
   toggle = false;
 
@@ -56,9 +57,8 @@ export class TbodyComponent implements OnInit {
     this.router.navigate(['rform', id]);
   }
   private onDelete(id: number) {
-    console.log(id);
     this.userSer.deleteUser(id);
-    console.log(this.userSer.users);
+    this.deleted.emit('User Deleted');
   }
 
 }

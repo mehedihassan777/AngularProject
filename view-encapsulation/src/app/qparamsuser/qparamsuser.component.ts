@@ -24,9 +24,10 @@ export class QparamsuserComponent {
     else
       this.loadUsers = this.users;
 
-    this.userSer.userChanged.subscribe(message => {
-      console.log(message);
-      this.searchInput('');
+    this.userSer.userChanged.subscribe(() => {
+      this.users = this.userSer.users;
+      this.loadUsers.length < 2 ? this.currentPage -= 1 : '';
+      this.paginate(this.currentPage);
     });
   }
 
