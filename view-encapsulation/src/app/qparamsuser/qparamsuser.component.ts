@@ -15,7 +15,7 @@ export class QparamsuserComponent {
   currentPage: number = 1;
   itemPerPage: number = 5;
   totalCount: number;
-  headings: string[] = ['Index', 'Id', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
+  headings: string[] = ['Id', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
   sortKey: string;
   toggle = false;
 
