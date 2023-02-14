@@ -22,18 +22,19 @@ export class TablePaginatorComponent implements OnChanges {
   }
 
   private makePage(users: number) {
+    const itemPerPage = 5;
     this.pages = [];
     let index = 0;
-    for (let i = 0; i < users / 5; i++) {
+    for (let i = 0; i < users / itemPerPage; i++) {
       this.pages.push(i + 1);
     }
     if (this.currentPage <= 2)
-      for (let i = 0; i < 3; i++){
+      for (let i = 0; i < 3; i++) {
         this.loadPages[index] = this.pages[i];
         index++;
       }
-        
-    else if (this.currentPage >= this.pages[this.pages.length-2])
+
+    else if (this.currentPage >= this.pages[this.pages.length - 2])
       for (let i = this.pages.length - 3; i < this.pages.length; i++) {
         this.loadPages[index] = this.pages[i];
         index++;

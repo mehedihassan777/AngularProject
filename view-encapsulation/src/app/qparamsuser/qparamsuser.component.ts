@@ -67,15 +67,14 @@ export class QparamsuserComponent {
       this.loadUsers = searchUsers;
       this.users = searchUsers;
     }
-
   }
 
   private paginate(currentPage) {
+    const itemPerPage = 5;
     this.loadUsers = [];
-    for (let i = (currentPage - 1) * 5; i < currentPage * 5; i++) {
+    for (let i = (currentPage - 1) * itemPerPage; i < currentPage * itemPerPage; i++) {
       if (this.users[i])
         this.loadUsers.push(this.users[i]);
     }
   }
-
 }
