@@ -13,7 +13,7 @@ export class TablePaginatorComponent implements OnChanges {
   @Input() itemPerPage: number;
   @Output() pageChanges = new EventEmitter<number>();
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.makePage(this.totalCount);
   }
 
@@ -22,11 +22,10 @@ export class TablePaginatorComponent implements OnChanges {
       this.pageChanges.emit(pageNumber);
   }
 
-  private makePage(users: number) {
-    const itemPerPage = 5;
+  private makePage(totalCount: number) {
     this.pages = [];
     let index = 0;
-    for (let i = 0; i < users / itemPerPage; i++) {
+    for (let i = 0; i < totalCount / this.itemPerPage; i++) {
       this.pages.push(i + 1);
     }
     if (this.pages.length < 3) {
