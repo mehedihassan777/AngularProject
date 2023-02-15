@@ -28,7 +28,7 @@ export class QparamsuserComponent {
       this.router.navigate([], { queryParams: { id: undefined }, queryParamsHandling: 'merge' });
     }
     this.loadPage();
-    this.userSer.userChanged.subscribe(id => {
+    this.userSer.userChanged.subscribe(() => {
       this.loadPage();
     });
   }
