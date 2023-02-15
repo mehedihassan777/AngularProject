@@ -88,7 +88,7 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
         this.userSer.addUser(formUser);
       }
 
-      this.router.navigate(['/qpramsuser']);
+      this.router.navigate(['/qpramsuser'], { queryParams: { id: this.id ? this.id : formUser.id } });
     }
   }
 

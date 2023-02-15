@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
 
@@ -19,11 +20,15 @@ export class QparamsuserComponent {
   sortKey: string;
   toggle = false;
 
-  constructor(private userSer: UsersService) { }
+  constructor(private userSer: UsersService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.queryParams['id']) {
+      this.currentPage = Math.ceil(+this.route.snapshot.queryParams['id'] / this.itemPerPage);
+      this.router.navigate([], { queryParams: { id: undefined }, queryParamsHandling: 'merge' });
+    }
     this.loadPage();
-    this.userSer.userChanged.subscribe(() => {
+    this.userSer.userChanged.subscribe(id => {
       this.loadPage();
     });
   }

@@ -19,6 +19,7 @@ export class TbodyComponent implements OnInit {
   ngOnInit() {
 
   }
+
   private onEdit(id: number) {
     this.router.navigate(['rform', id]);
   }

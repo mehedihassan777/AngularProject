@@ -31,8 +31,9 @@ export class UsersService {
     }
 
     updateUser(user: User) {
-        this.users[this.users.findIndex((x) => x.id == user.id)] = user;
-        this.userChanged.next('User Updated');
+        const index = this.users.findIndex((x) => x.id == user.id);
+        this.users[index] = user;
+        this.userChanged.next(index.toString());
     }
 
     deleteUser(id: number) {
