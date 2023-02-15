@@ -25,7 +25,7 @@ export class QparamsuserComponent {
   ngOnInit(): void {
     if (this.route.snapshot.queryParams['id']) {
       this.currentPage = Math.ceil(+this.route.snapshot.queryParams['id'] / this.itemPerPage);
-      this.router.navigate([], { queryParams: { id: undefined }, queryParamsHandling: 'merge' });
+      this.router.navigate([]);
     }
     this.loadPage();
     this.userSer.userChanged.subscribe(() => {
