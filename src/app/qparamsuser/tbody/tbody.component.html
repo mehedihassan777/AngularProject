@@ -1,0 +1,15 @@
+<tbody>
+    <tr *ngFor="let user of allUsers | sortBy: sortKey: toggle ; let i = index">
+        <!-- <td>{{ i+1 }}</td> -->
+        <td>{{ user.id }}</td>
+        <td>{{ user.fname }}</td>
+        <td>{{ user.lname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.gender }}</td>
+        <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(user.id)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(user.id)">X</button>
+        </td>
+    </tr>
+</tbody>

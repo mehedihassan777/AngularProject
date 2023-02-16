@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row margin mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div>
+                <h3 class="alert alert-success">Select Any Topic to see Details</h3>
+            </div>
+
+            <div class="mt-5">
+                <a routerLink="/parent" class="col-md-12 btn btn-info">1. View Encapsulation</a>
+            </div>
+            <div class="mt-4">
+                <a routerLink="/tdform" class="col-md-12 btn btn-info">2. Template Driven Form with Custom Pipe
+                    Transformed Data</a>
+            </div>
+
+            <div class="mt-4">
+                <a routerLink="/rform" class="col-md-12 btn btn-info">3. Signup Or Update Users ( Reactive Form )</a>
+            </div>
+
+            <div class="mt-4">
+                <button class="col-md-12 btn btn-info" (click)="onNavigate()">4.All Users List</button>
+            </div>
+
+            <div class="mt-4">
+                <a routerLink="/lifecycle" class="col-md-12 btn btn-info">5. Component Life Cycle Hooks</a>
+            </div>
+
+            <div *ngIf="!loggedIn" class="mt-4">
+                <div class="text-center">
+                    <a routerLink="/login" class="btn btn-success">Login</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

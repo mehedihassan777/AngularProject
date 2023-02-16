@@ -1,0 +1,41 @@
+<div class="container">
+    <app-header></app-header>
+    <br>
+    <hr>
+    <div class="row">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div>
+                <div class="form-group">
+                    <label class="col-md-6" for="username">Username</label>
+                    <input type="text" id="username" ngModel name="username" required #name="ngModel"
+                        class="form-control">
+                    <span *ngIf="!name.valid && name.touched" class="help-block ">Please Input A Username</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input type="email" id="email" ngModel name="email" #email required email class="form-control">
+                    <span *ngIf="!email.valid && email.touched" class="help-block">Please Input Valid Email</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Comment</label>
+                    <textarea class="form-control" name="comment" ngModel></textarea>
+                </div>
+            </div>
+            <br><br>
+            <div class="text-center">
+                <button class="btn btn-primary" [disabled]="!f.valid" type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+    <br><br>
+    <hr>
+    <h4>Username: {{ username | uppercase}}</h4>
+    <h6>Email: {{ inpEmail | lowercase }}</h6>
+    <p>comment: {{ comment | shorten: 200}}</p>
+
+    <br><br>
+    <hr>
+    <h3>Full Form Value is in console</h3>
+</div>

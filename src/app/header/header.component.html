@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><a routerLink="/home" class="btn btn-success">Home</a></div>
+        <div class="col-md-4">
+            <button *ngIf="!loggedIn" class="btn btn-info" (click)="onLogIn()">Login</button>
+            <button *ngIf="loggedIn" class="btn btn-dark" (click)="onLogOut()">Log Out</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row mt-5">
+    <app-header></app-header>
+    <app-search (searchName)="searchInput($event)"></app-search>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <table>
+      <app-thead [headings]="headings" (clicked)="onClick($event)"></app-thead><br>
+      <app-tbody [allUsers]="loadUsers" [sortKey]="sortKey" [toggle]="toggle" (delete)="onDelete($event)"></app-tbody>
+    </table>
+  </div>
+  <br>
+  <app-table-paginator [currentPage]="currentPage" [totalCount]="totalCount" [itemPerPage]="itemPerPage" (pageChanges)="changePage($event)"></app-table-paginator>
+</div>
+<!-- 
+<data-table-search></data-table-search> //Will contain a search field on Fullname.
+<data-table-header></user-table-header> // First Name, Last name, Email, Phone, Gender
+<data-table-body></data-table-body> //Pass users data and show them in the table
+<data-table-paginator></data-table-paginator> //Will accept pageNo, No of Items and show data based on provided params
+ -->

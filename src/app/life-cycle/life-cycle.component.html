@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row mt-5">
+        <app-header></app-header>
+        <div class="col-md-4"><input [(ngModel)]="input" type="text">
+            <p>{{ input }}</p>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <h3>Here we will try to show a canvas in OnChange()</h3>
+        <h4>OnChanges Count : {{ changeCount }}</h4>
+        <button class="btn btn-info" (click)="ngOnChanges()">OnChange</button>
+        <hr>
+        <canvas *ngIf="changeCanvasFlag" id="myCanvas" style="border:1px solid black;"></canvas>
+    </div>
+
+    <br>
+    <hr>
+    <div class="row">
+        <h3>Here we will try to show a canvas in OnInit()</h3>
+        <h4>OnInit Count : {{ initCount }}</h4>
+        <button class="btn btn-info" (click)="ngOnInit()">OnChange</button>
+        <hr>
+        <canvas *ngIf="initCanvasFlag" id="myCanvas" style="border:1px solid black;"></canvas>
+    </div>
+
+    <br>
+    <hr>
+    <div class="row">
+        <h3>Here we will try to show a canvas in DoCheck()</h3>
+        <h4>DoCheck Count : {{ doCheckCount }}</h4>
+        <hr>
+    </div>
+
+    <br>
+    <hr>
+    <div class="row">
+        <h3>Here we will try to show a canvas in AfterContentInit()</h3>
+        <h4>AfterContentInit Count : {{ contentCount }}</h4>
+        <hr>
+    </div>
+
+    <br>
+    <hr>
+    <div class="row">
+        <h3>Here we will try to show a canvas in AfterViewInit()</h3>
+        <h4>AfterViewInit Count : {{ viewCount }}</h4>
+        <button class="btn btn-info" (click)="ngAfterViewInit()">OnChange</button>
+        <hr>
+        <canvas *ngIf="viewCanvasFlag" id="myCanvas" style="border:1px solid black;"></canvas>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div *ngIf="pages.length>1" class="d-flex">
+    <div>Page:</div>
+    <div *ngIf="currentPage !=1" style="padding-left: 20px;">
+        <button (click)="changePage(currentPage-1)"><i class="fa-solid fa-arrow-left"></i></button>
+    </div>
+    <div *ngFor="let page of loadPages" style="padding-left: 20px;">
+        <button  [ngStyle]="{backgroundColor: currentPage == page ? 'green' : ''}" (click)="changePage(page)">{{page}}</button>
+    </div>
+    <div *ngIf="currentPage != pages[pages.length - 1]" style="padding-left: 20px;">
+        <button  (click)="changePage(currentPage+1)"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</div>

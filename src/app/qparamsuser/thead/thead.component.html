@@ -1,0 +1,5 @@
+<thead>
+    <th *ngFor="let heading of headings" (click)="onClick(heading)">{{ heading }} <i *ngIf="heading != 'Action' && heading != 'Index'"
+            class="fas fa-sort"></i>
+    </th>
+</thead>

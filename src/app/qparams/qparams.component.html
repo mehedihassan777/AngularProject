@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><a routerLink="/home" class="btn btn-success">Home</a></div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <h4>Id : {{ loadUser.id }}</h4>
+        <h4>Role : {{ loadUser.role }}</h4>
+        <h4>Status : {{ loadUser.status }}</h4>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <input type="text" [(ngModel)]="username">
+    </div>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-primary" (click)="onSetUserName()">Set User Name</button>
+    </div>
+</div>
