@@ -31,9 +31,6 @@ export class QparamsuserComponent {
       this.router.navigate([]);
     }
     this.loadPage();
-    this.userSer.userChanged.subscribe(() => {
-      this.loadPage();
-    });
   }
 
   searchInput(input: string) {
