@@ -33,6 +33,21 @@ export class QparamsuserComponent {
     });
   }
 
+  searchInput(input: string) {
+    if (input == '' || !input) {
+      this.currentPage = 1;
+      this.loadPage();
+    }
+    else
+      this.searchUser(input);
+  }
+
+  changePage(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.searchUsers.length > 0 ? this.loadSearch() : this.loadPage();
+
+  }
+
   onClick(heading) {
     switch (heading) {
       case 'Id':
@@ -58,27 +73,11 @@ export class QparamsuserComponent {
     }
   }
 
-  changePage(pageNumber: number) {
-    this.currentPage = pageNumber;
-    this.searchUsers.length > 0 ? this.loadSearch() : this.loadPage();
-
-  }
-
   onDelete(id: number) {
     this.userSer.deleteUser(id);
     this.loadUsers.length < 1 ? this.currentPage -= 1 : '';
     this.loadPage();
   }
-
-  searchInput(input: string) {
-    if (input == '' || !input) {
-      this.currentPage = 1;
-      this.loadPage();
-    }
-    else
-      this.searchUser(input);
-  }
-
 
   private searchUser(searchName) {
     this.currentPage = 1;
