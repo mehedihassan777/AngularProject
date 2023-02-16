@@ -79,7 +79,7 @@ export class QparamsuserComponent {
 
   onDelete(id: number) {
     this.userSer.deleteUser(id);
-    this.loadUsers.length < 1 ? this.currentPage -= 1 : '';
+    this.loadUsers.length < 2 ? this.currentPage -= 1 : '';
     this.loadPage();
   }
 

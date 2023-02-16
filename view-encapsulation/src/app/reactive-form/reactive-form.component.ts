@@ -13,7 +13,7 @@ import { UserFormType } from './formType';
 })
 export class ReactiveFormComponent implements OnInit, DoCheck {
   practiceForm: FormGroup<UserFormType>;
-  id: number = 1;
+  id: number = NaN;
   constructor(private router: Router, private route: ActivatedRoute, private userSer: UsersService) {
     this.practiceForm = new FormGroup<UserFormType>({
       fname: new FormControl('', [Validators.required]),
