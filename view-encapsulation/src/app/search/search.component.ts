@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SearchComponent {
   @Output() searchName = new EventEmitter<string>();
+
   onKeyUp(x) {
     this.searchName.emit(x.target.value);
   }

@@ -45,7 +45,6 @@ export class QparamsuserComponent {
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
     this.searchUsers.length > 0 ? this.loadSearch() : this.loadPage();
-
   }
 
   onClick(heading) {
