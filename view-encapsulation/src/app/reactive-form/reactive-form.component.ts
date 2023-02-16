@@ -13,16 +13,21 @@ import { UserFormType } from './formType';
 })
 export class ReactiveFormComponent implements OnInit, DoCheck {
   practiceForm: FormGroup<UserFormType>;
-  id: number;
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private userSer: UsersService
-  ) { }
+  id: number = 1;
+  constructor(private router: Router, private route: ActivatedRoute, private userSer: UsersService) {
+    this.practiceForm = new FormGroup<UserFormType>({
+      fname: new FormControl('', [Validators.required]),
+      lname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl(null, [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      cPassword: new FormControl('', [Validators.required]),
+      gender: new FormControl('Male'),
+      sports: new FormArray<any>([]),
+    });
+   }
 
   ngOnInit() {
-    this.createForm();
-
     const id = this.route.snapshot.params['id'];
     if (id && !isNaN(id)) {
       this.id = +id;
@@ -75,7 +80,7 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
     );
   }
 
-  onDeleteSport(i) {
+  onDeleteSport(i: number) {
     (<FormArray>this.practiceForm.get('sports')).removeAt(i);
   }
 
@@ -90,19 +95,6 @@ export class ReactiveFormComponent implements OnInit, DoCheck {
 
       this.router.navigate(['/qpramsuser'], { queryParams: { id: this.id ? this.id : formUser.id } });
     }
-  }
-
-  private createForm() {
-    this.practiceForm = new FormGroup<UserFormType>({
-      fname: new FormControl('', [Validators.required]),
-      lname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl(null, [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      cPassword: new FormControl('', [Validators.required]),
-      gender: new FormControl('Male'),
-      sports: new FormArray([]),
-    });
   }
 
   private loadForm(user: User) {

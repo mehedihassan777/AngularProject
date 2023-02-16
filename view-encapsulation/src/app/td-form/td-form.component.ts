@@ -11,7 +11,7 @@ export class TdFormComponent {
   username: string = '';
   inpEmail: string = '';
   comment: string = '';
-  formValue;
+  formValue:any;
 
   onSubmit(form: NgForm) {
     this.username = form.value.username;

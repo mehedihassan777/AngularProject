@@ -10,7 +10,6 @@ import { UsersService } from './users.service';
 })
 export class AppComponent implements OnInit, DoCheck {
   title = 'view-encapsulation';
-  autoLogout;
 
   setUsers: User[] = [
     { id: 1, fname: 'Mehedi', lname: 'Hassan', email: 'mehadihassan170@gmail.com', phone: 1731192089, password: '12345', gender: 'Male', sports: [{ name: 'Cricket', pYear: 7 }, { name: 'Football', pYear: 5 }] },

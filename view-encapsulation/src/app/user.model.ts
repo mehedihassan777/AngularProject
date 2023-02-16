@@ -1,7 +1,7 @@
 import { Sport } from './sports.model';
 
 export interface User {
-    id?: number;
+    id: number;
     fname: string;
     lname: string;
     email?: string;

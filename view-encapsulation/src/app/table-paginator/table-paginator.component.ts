@@ -6,11 +6,11 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
   styleUrls: ['./table-paginator.component.css']
 })
 export class TablePaginatorComponent implements OnChanges {
-  pages = [];
-  loadPages = [];
-  @Input() currentPage: number;
-  @Input() totalCount: number;
-  @Input() itemPerPage: number;
+  pages: number [] = [];
+  loadPages: number[] = [];
+  @Input() currentPage: number = 1;
+  @Input() totalCount: number = 1;
+  @Input() itemPerPage: number = 1;
   @Output() pageChanges = new EventEmitter<number>();
 
   ngOnChanges(): void {

@@ -5,7 +5,7 @@ import { UsersService } from "../users.service";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     loggedIn = false;
-    autoLogoutHandler;
+    autoLogoutHandler: any;
 
     constructor(private userSer: UsersService, private router: Router) { }
 

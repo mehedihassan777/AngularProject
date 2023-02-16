@@ -17,8 +17,17 @@ export class UsersService {
         });
     }
 
-    getUserForPage(currentPage, itemPerPage) {
-        return { users: this.users.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage), totalUsers: this.users.length };
+    getUserForPage(currentPage: number, itemPerPage: number, searchText?: string) {
+        if (searchText) {
+            let findUsers = this.users.filter(user => {
+                return user.fname.toLowerCase().match(searchText.toLowerCase()) || user.lname.toLowerCase().match(searchText.toLowerCase());
+            });
+
+            return { users: findUsers.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage), totalUsers: findUsers.length };
+        }
+
+        else
+            return { users: this.users.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage), totalUsers: this.users.length };
     }
 
     getUser(id: number) {

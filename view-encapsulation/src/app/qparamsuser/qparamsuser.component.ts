@@ -11,14 +11,17 @@ import { UsersService } from '../users.service';
 })
 export class QparamsuserComponent {
 
-  searchUsers: User[] = [];
   loadUsers: User[] = [];
   currentPage: number = 1;
   itemPerPage: number = 5;
-  totalCount: number;
+  totalCount: number = 0;
   headings: string[] = ['Id', 'First Name', 'Last Name', 'Email', 'Phone', 'Gender', 'Action'];
-  sortKey: string;
-  toggle = false;
+  sortKey: string = 'Id';
+  toggle: boolean = false;
+  searchText: string = '';
+  searchMode: boolean = false;
+  searchHandler: any;
+
 
   constructor(private userSer: UsersService, private route: ActivatedRoute, private router: Router) { }
 
@@ -34,20 +37,25 @@ export class QparamsuserComponent {
   }
 
   searchInput(input: string) {
-    if (input == '' || !input) {
-      this.currentPage = 1;
-      this.loadPage();
-    }
-    else
-      this.searchUser(input);
+    this.searchText = input;
+    clearTimeout(this.searchHandler);
+    this.searchHandler = setTimeout(() => {
+      if (input == '' || !input) {
+        this.currentPage = 1;
+        this.loadPage();
+        this.searchMode = false;
+      }
+      else
+        this.searchUser(undefined, input);
+    }, 2000);
   }
 
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
-    this.searchUsers.length > 0 ? this.loadSearch() : this.loadPage();
+    this.searchMode ? this.searchUser(pageNumber, this.searchText) : this.loadPage();
   }
 
-  onClick(heading) {
+  onClick(heading: string) {
     switch (heading) {
       case 'Id':
         this.sort('id');
@@ -78,32 +86,18 @@ export class QparamsuserComponent {
     this.loadPage();
   }
 
-  private searchUser(searchName) {
-    this.currentPage = 1;
-    let findUsers = this.userSer.users.filter(user => {
-      return user.fname.toLowerCase().match(searchName.toLowerCase()) || user.lname.toLowerCase().match(searchName.toLowerCase());
-    });
-    this.totalCount = findUsers.length;
-
-    if (findUsers.length > 5) {
-      this.searchUsers = findUsers;
-      this.loadSearch();
-    }
-    else {
-      this.loadUsers = findUsers;
-      this.searchUsers = findUsers;
-    }
+  private searchUser(currentPage?: number, searchName?: string) {
+    currentPage ? this.currentPage = currentPage : this.currentPage = 1;
+    const data = this.userSer.getUserForPage(this.currentPage, this.itemPerPage, searchName);
+    this.loadUsers = data.users;
+    this.totalCount = data.totalUsers;
+    this.searchMode = true;
   }
 
   private loadPage() {
     const data = this.userSer.getUserForPage(this.currentPage, this.itemPerPage);
     this.loadUsers = data.users;
     this.totalCount = data.totalUsers;
-  }
-
-  private loadSearch() {
-    this.totalCount = this.searchUsers.length;
-    this.loadUsers = this.searchUsers.slice((this.currentPage - 1) * this.itemPerPage, this.currentPage * this.itemPerPage);
   }
 
   private sort(key: string) {

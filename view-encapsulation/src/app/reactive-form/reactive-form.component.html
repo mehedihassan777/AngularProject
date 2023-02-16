@@ -9,7 +9,7 @@
                     <label for="username">First Name</label>
                     <input type="text" formControlName="fname" class="form-control" />
                     <span *ngIf="
-                        !practiceForm.get('fname').valid && practiceForm.get('fname').touched
+                        !practiceForm.get('fname')?.valid && practiceForm.get('fname')?.touched
                       " class="help-block">
                         <span *ngIf="practiceForm.get('fname').errors['required']" class="help-block">Please Enter a
                             valid
@@ -20,7 +20,7 @@
                     <label for="username">Last Name</label>
                     <input type="text" formControlName="lname" class="form-control" />
                     <span *ngIf="
-                        !practiceForm.get('lname').valid && practiceForm.get('lname').touched
+                        !practiceForm.get('lname')?.valid && practiceForm.get('lname')?.touched
                       " class="help-block">
                         <span *ngIf="practiceForm.get('lname').errors['required']" class="help-block">Please Enter a
                             valid
@@ -39,8 +39,8 @@
                 <span *ngIf="
             !practiceForm.value.email &&
             !practiceForm.value.phone &&
-            (practiceForm.get('phone').touched ||
-              practiceForm.get('email').touched)
+            (practiceForm.get('phone')?.touched ||
+              practiceForm.get('email')?.touched)
           " class="help-block">
                     Email Or Phone is Required
                 </span>

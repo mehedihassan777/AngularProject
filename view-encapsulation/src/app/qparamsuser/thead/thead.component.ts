@@ -10,7 +10,7 @@ export class TheadComponent {
   @Input() headings = [];
   @Output() clicked = new EventEmitter<string>();
 
-  onClick(heading) {
+  onClick(heading: string) {
     this.clicked.emit(heading);
   }
 }

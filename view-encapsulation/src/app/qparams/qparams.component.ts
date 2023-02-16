@@ -25,8 +25,8 @@ export class QparamsComponent implements OnInit {
     }
   ];
 
-  loadUser: { role: string, status: string, id: number };
-  userId: number;
+  loadUser: { role: string, status: string, id: number } = { role: '', status: '', id: NaN };
+  userId: number =1;
   username: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute) { }
