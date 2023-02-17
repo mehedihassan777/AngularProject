@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { findIndex } from 'lodash';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/users.service';
 export class SuggestionComponent implements OnChanges {
 
   @Input() query: string = '';
-  @Input() allUserNames: string [] = [];
+  @Input() allUserNames: string[] = [];
   suggestions: string[] = [];
   @Input() suggestionHandle: boolean = true;
   @Output() searchSuggestion = new EventEmitter<string>();
@@ -20,6 +21,8 @@ export class SuggestionComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.query == '')
+      this.suggestions = [];
+    else if (this.allUserNames.findIndex(name => name.toLocaleLowerCase() == this.query.toLocaleLowerCase()) != -1)
       this.suggestions = [];
     else
       this.getSearchSuggestions();
