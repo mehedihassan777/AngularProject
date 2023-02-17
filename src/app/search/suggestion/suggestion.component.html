@@ -1,0 +1,3 @@
+<div *ngIf="suggestions.length > 0 && suggestionHandle" class="alert alert-success">
+    <p *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">{{ suggestion }}</p>
+</div>

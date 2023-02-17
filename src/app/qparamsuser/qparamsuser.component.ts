@@ -12,6 +12,7 @@ import { UsersService } from '../users.service';
 export class QparamsuserComponent {
 
   loadUsers: User[] = [];
+  allUserNames: string[] = [];
   currentPage: number = 1;
   itemPerPage: number = 5;
   totalCount: number = 0;
@@ -26,6 +27,7 @@ export class QparamsuserComponent {
   constructor(private userSer: UsersService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.allUserNames = this.userSer.searchSuggestion();
     if (this.route.snapshot.queryParams['id']) {
       this.currentPage = Math.ceil(+this.route.snapshot.queryParams['id'] / this.itemPerPage);
       this.router.navigate([]);

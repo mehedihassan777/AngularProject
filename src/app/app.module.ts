@@ -22,6 +22,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './login/auth-guard.service';
 import { SearchComponent } from './search/search.component';
+import { SuggestionComponent } from './search/suggestion/suggestion.component';
 
 
 
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     TablePaginatorComponent,
     HeaderComponent,
     LoginComponent,
-    SearchComponent
+    SearchComponent,
+    SuggestionComponent
   ],
   imports: [
     BrowserModule,

@@ -3,8 +3,15 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <input (keyup)="onKeyUp($event)" type="text">
+            <input #input value="{{ query }}" (keyup)="onKeyUp($event)" type="text">
             <label style="padding: 30px;">Search</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <app-suggestion (searchSuggestion)=" onSelect($event)" [allUserNames]="allUserNames" [query]="query" [suggestionHandle]="suggestionHandle"></app-suggestion>
         </div>
     </div>
 </div>
