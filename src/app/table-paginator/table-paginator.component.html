@@ -1,6 +1,6 @@
 <div *ngIf="pages.length>1" class="d-flex">
     <div>Page:</div>
-    <div *ngIf="currentPage !=1" style="padding-left: 20px;">
+    <div *ngIf="currentPage !=1 && pages[pages.length - 1] > 3" style="padding-left: 20px;">
         <button (click)="changePage(1)">First</button>
     </div>
     <div *ngIf="currentPage !=1" style="padding-left: 20px;">
@@ -13,7 +13,7 @@
     <div *ngIf="currentPage != pages[pages.length - 1]" style="padding-left: 20px;">
         <button (click)="changePage(currentPage+1)"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
-    <div *ngIf="currentPage != pages[pages.length - 1]" style="padding-left: 20px;">
+    <div *ngIf="currentPage != pages[pages.length - 1] && pages[pages.length - 1] > 3" style="padding-left: 20px;">
         <button (click)="changePage(pages.length)">Last</button>
     </div>
 </div>

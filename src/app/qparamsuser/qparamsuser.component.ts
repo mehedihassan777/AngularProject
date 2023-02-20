@@ -82,7 +82,7 @@ export class QparamsuserComponent {
   onDelete(id: number) {
     this.userSer.deleteUser(id);
     this.loadUsers.length < 2 ? this.currentPage -= 1 : '';
-    this.loadPage();
+    this.searchMode ? this.searchUser(this.currentPage, this.searchText) : this.loadPage();
   }
 
   private searchUser(currentPage?: number, searchName?: string) {
