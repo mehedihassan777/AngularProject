@@ -85,6 +85,11 @@ export class QparamsuserComponent {
     this.searchMode ? this.searchUser(this.currentPage, this.searchText) : this.loadPage();
   }
 
+  onFilterItem() {
+    this.currentPage = 1;
+    this.loadPage();
+  }
+
   private searchUser(currentPage?: number, searchName?: string) {
     currentPage ? this.currentPage = currentPage : this.currentPage = 1;
     const data = this.userSer.getUserForPage(this.currentPage, this.itemPerPage, searchName);

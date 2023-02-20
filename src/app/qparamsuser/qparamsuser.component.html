@@ -4,6 +4,13 @@
     <app-search (searchName)="searchInput($event)" [allUserNames]="allUserNames"></app-search>
   </div>
   <br />
+  <label>Show 
+    <select [(ngModel)]="itemPerPage" (change)="onFilterItem()">
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+    </select> entries
+  </label>
   <hr />
   <div class="row">
     <table>
@@ -12,7 +19,8 @@
     </table>
   </div>
   <br>
-  <app-table-paginator [currentPage]="currentPage" [totalCount]="totalCount" [itemPerPage]="itemPerPage" (pageChanges)="changePage($event)"></app-table-paginator>
+  <app-table-paginator [currentPage]="currentPage" [totalCount]="totalCount" [itemPerPage]="itemPerPage"
+    (pageChanges)="changePage($event)"></app-table-paginator>
 </div>
 <!-- 
 <data-table-search></data-table-search> //Will contain a search field on Fullname.

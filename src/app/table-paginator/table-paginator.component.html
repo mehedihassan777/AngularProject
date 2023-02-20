@@ -1,6 +1,6 @@
 <div class="d-flex">
     <div class="col-md-3">
-        <h6>Showing {{(currentPage-1)*5+1}} to {{(currentPage-1)*5+5 < totalCount ? (currentPage-1)*5+5 : totalCount}} of {{totalCount}} entries </h6>
+        <h6>Showing {{(currentPage-1)*itemPerPage+1}} to {{(currentPage-1)*itemPerPage+ +itemPerPage < totalCount ? (currentPage-1)*itemPerPage+ +itemPerPage : totalCount}} of {{totalCount}} entries </h6>
     </div>
     <div class="col-md-6">
         <div *ngIf="pages.length>1" class="d-flex">
